@@ -15,13 +15,7 @@ const Modal = ({ size = 'small', isOpen, title, content }: Props) => {
       {isOpen && (
         <Overlay>
           <ModalBox size={size}>
-            <Header>
-              {size === 'small' ? (
-                <SmallHeaderBar>{title}</SmallHeaderBar>
-              ) : (
-                <BigHeaderBar>{title}</BigHeaderBar>
-              )}
-            </Header>
+            <Header size={size}>{title}</Header>
             <Contents>{content}</Contents>
           </ModalBox>
         </Overlay>
@@ -43,33 +37,27 @@ const Overlay = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
 const ModalBox = styled.div((props: { size: 'small' | 'big' }) => ({
   width: props.size === 'small' ? '650px' : '700px',
   height: props.size === 'small' ? '350px' : '800px',
   backgroundColor: 'white',
   borderRadius: '30px',
 }));
-const Header = styled.div`
-  height: 20%;
-  font-weight: bold;
-`;
-const SmallHeaderBar = styled.div`
-  height: 100%;
-  border-radius: 30px 30px 0 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 24px;
-  color: #fff;
-  background-color: ${Common.colors.primary};
-`;
-const BigHeaderBar = styled.div`
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 36px;
-`;
+
+const Header = styled.div((props: { size: 'small' | 'big' }) => ({
+  height: '20%',
+  fontWeight: 'bold',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  borderRadius: '30px 30px 0 0',
+  fontSize: props.size === 'small' ? '24px' : '36px',
+  backgroundColor:
+    props.size === 'small' ? Common.colors.primary : 'transparent',
+  color: props.size === 'small' ? '#fff' : 'black',
+}));
+
 const Contents = styled.div`
   height: 80%;
   display: flex;
