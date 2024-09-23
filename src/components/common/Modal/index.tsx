@@ -5,16 +5,23 @@ import { ReactNode } from 'react';
 interface Props {
   size?: 'small' | 'big';
   isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   title: string;
   content: ReactNode;
 }
 
-const Modal = ({ size = 'small', isOpen, title, content }: Props) => {
+const Modal = ({
+  size = 'small',
+  isOpen,
+  setIsOpen,
+  title,
+  content,
+}: Props) => {
   return (
     <Wrapper>
       {isOpen && (
-        <Overlay>
-          <ModalBox size={size}>
+        <Overlay onClick={() => setIsOpen(false)}>
+          <ModalBox size={size} onClick={(e) => e.stopPropagation()}>
             <Header size={size}>{title}</Header>
             <Contents>{content}</Contents>
           </ModalBox>
