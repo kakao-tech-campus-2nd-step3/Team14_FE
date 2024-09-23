@@ -5,7 +5,7 @@ interface Props {
   content: string;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
-const SmallModalContent = ({ content, setIsOpen }: Props) => {
+const AlertDialog = ({ content, setIsOpen }: Props) => {
   return (
     <div>
       <Content>{content}</Content>
@@ -18,10 +18,12 @@ const SmallModalContent = ({ content, setIsOpen }: Props) => {
     </div>
   );
 };
+
 const Content = styled.div`
   font-size: 24px;
   margin-bottom: 20px;
 `;
+
 const Wrapper = styled.div`
   position: absolute;
   bottom: 30px;
@@ -30,7 +32,8 @@ const Wrapper = styled.div`
   gap: 10px;
   justify-content: end;
 `;
-// TODO:버튼 컴포넌트 생선 전 임시로 사용
+
+// TODO:버튼 컴포넌트 생성 전 임시로 사용
 const Button = styled.div((props: { cancle?: boolean }) => ({
   borderRadius: '20px',
   backgroundColor: props.cancle
@@ -48,4 +51,4 @@ const Button = styled.div((props: { cancle?: boolean }) => ({
   },
 }));
 
-export default SmallModalContent;
+export default AlertDialog;
