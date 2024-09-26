@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
 import './App.css';
-import OrderListItem from '@components/OrderListItem';
+import { Routes } from './routes';
 
 function App() {
   return (
     <div className="App">
       안녕 애드라 화이팅.
-      <OrderListItem />
+      <Routes />
     </div>
   );
 }
