@@ -1,29 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-const Wrapper = styled.div`
-  width: 50%;
-  display: flex;
-  justify-content: center;
-  border: 1px solid #c7c3c3;
-  padding: 10px 0;
-`;
-const Container = styled.div`
-  width: 70%;
-  display: flex;
-  flex-direction: column;
-  margin-left: 20px;
-`;
-const ProgressLabel = styled.span`
-  font-size: 15px;
-  margin-left: 10px;
-`;
-const Title = styled.p`
-  font-size: 25px;
-  text-align: left;
-  margin: 10px 0;
-`;
-
 const OrderListItem = () => {
   return (
     <Wrapper>
@@ -47,3 +24,26 @@ const OrderListItem = () => {
 };
 
 export default OrderListItem;
+
+const Wrapper = styled.div`
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  border: 1px solid #c7c3c3;
+  padding: 10px 0;
+`;
+const Container = styled.div`
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+`;
+const ProgressLabel = styled.span`
+  font-size: 15px;
+  margin-left: 10px;
+`;
+const Title = styled.p`
+  font-size: 25px;
+  text-align: left;
+  margin: 10px 0;
+`;
