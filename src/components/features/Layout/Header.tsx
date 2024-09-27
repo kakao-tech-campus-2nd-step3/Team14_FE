@@ -1,14 +1,49 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import Button from '../../common/Button/Button';
+import { Common } from '../../../styles/globalStyle';
 
 export const HEADER_HEIGHT = '64px';
 
+export const Header: React.FC = () => {
+  const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  return (
+    <Wrapper>
+      <Container>
+        <HeaderLeft>
+          <LogoWrapper href="/">
+            <Logo src="/image/logo.png" alt="로고" />
+            <Location>여기먹때</Location>
+          </LogoWrapper>
+
+          <DropdownContainer>
+            <Dropdown onClick={toggleDropdown}>
+              용봉동 {isDropdownOpen ? '▲' : '▼'}
+            </Dropdown>
+            <DropdownMenu isOpen={isDropdownOpen}>
+              <DropdownItem>용봉동</DropdownItem>
+              <DropdownItem transparent>내 동네 설정</DropdownItem>
+            </DropdownMenu>
+          </DropdownContainer>
+        </HeaderLeft>
+
+        <Button label="로그인" bgColor="#ffd500" radius="5px" />
+      </Container>
+    </Wrapper>
+  );
+};
+
 const Wrapper = styled.header`
   position: fixed;
-  z-index: 9999;
+  z-index: ${Common.zIndex.header};
   width: 100%;
   height: ${HEADER_HEIGHT};
-  background-color: #059770;
+  background-color: ${Common.colors.primary};
   display: flex;
   justify-content: center;
   padding: 0 20px;
@@ -21,6 +56,12 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
+
+const HeaderLeft = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
 `;
 
 const LogoWrapper = styled.a`
@@ -72,9 +113,7 @@ const DropdownMenu = styled.div<DropdownMenuProps>`
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   padding: 10px;
   border-radius: 10px;
-  display: ${(props) => {
-    return props.isOpen ? 'block' : 'none';
-  }};
+  display: ${(props) => (props.isOpen ? 'block' : 'none')};
   z-index: 9999;
   min-width: 160px;
 `;
@@ -84,65 +123,9 @@ const DropdownItem = styled.div<DropdownItemProps>`
   font-size: 16px;
   font-weight: bold;
   text-align: left;
-  color: ${(props) => {
-    return props.transparent ? 'rgba(0, 0, 0, 0.4)' : '#000000';
-  }};
+  color: ${(props) => (props.transparent ? 'rgba(0, 0, 0, 0.4)' : '#000000')};
   cursor: pointer;
   &:hover {
     background-color: #f0f0f0;
   }
 `;
-
-const LoginButton = styled.button`
-  background-color: #ffd500;
-  color: white;
-  padding: 9px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: bold;
-
-  &:hover {
-    background-color: #e6c200;
-  }
-`;
-
-export const Header: React.FC = () => {
-  const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
-
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
-
-  return (
-    <Wrapper>
-      <Container>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            position: 'relative',
-          }}
-        >
-          <LogoWrapper href="/">
-            <Logo src="/image/logo.png" alt="로고" />
-            <Location>여기먹때</Location>
-          </LogoWrapper>
-
-          <DropdownContainer>
-            <Dropdown onClick={toggleDropdown}>
-              용봉동 {isDropdownOpen ? '▲' : '▼'}
-            </Dropdown>
-            <DropdownMenu isOpen={isDropdownOpen}>
-              <DropdownItem>용봉동</DropdownItem>
-              <DropdownItem transparent>내 동네 설정</DropdownItem>
-            </DropdownMenu>
-          </DropdownContainer>
-        </div>
-
-        <LoginButton>로그인</LoginButton>
-      </Container>
-    </Wrapper>
-  );
-};
