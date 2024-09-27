@@ -1,14 +1,20 @@
 import styled from '@emotion/styled';
 import Logo from './Logo';
 
-const Card = () => {
+interface Props {
+  key: number;
+  category: string;
+  title: string;
+  address: string;
+}
+const SlideItem = ({ category, title, address }: Props) => {
   return (
     <Container>
       <Logo image={'/image/restaurant.png'} />
       <Wrapper>
-        <Category>[토스트]</Category>
-        <Title>이삭토스트</Title>
-        <Address>픽업 | 경기 용인시 수지구 용구대로 2770</Address>
+        <Category>[{category}]</Category>
+        <Title>{title}</Title>
+        <Address>픽업 | {address}</Address>
       </Wrapper>
     </Container>
   );
@@ -23,8 +29,10 @@ const Container = styled.div`
   border-radius: 20px;
   background-color: #fff;
   opacity: 0.8;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-}
+  box-shadow:
+    0 3px 6px rgba(0, 0, 0, 0.16),
+    0 3px 6px rgba(0, 0, 0, 0.23);
+  flex-shrink: 0;
 `;
 
 const Wrapper = styled.div`
@@ -44,4 +52,4 @@ const Title = styled.div`
 `;
 const Address = styled.div``;
 
-export default Card;
+export default SlideItem;
