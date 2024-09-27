@@ -5,10 +5,6 @@ export const Common = {
     yellow: '#F1CF06',
   },
   zIndex: {
-    header: 9999,
-    dropdown: 1000,
-  },
-  zIndex: {
     common: 100,
     header: 9999,
     dropdown: 1000,
