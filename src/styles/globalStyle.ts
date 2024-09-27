@@ -8,4 +8,9 @@ export const Common = {
     header: 9999,
     dropdown: 1000,
   },
+  zIndex: {
+    common: 100,
+    header: 9999,
+    dropdown: 1000,
+  },
 };
