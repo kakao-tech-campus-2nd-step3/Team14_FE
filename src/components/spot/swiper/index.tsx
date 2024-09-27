@@ -1,58 +1,62 @@
 import styled from '@emotion/styled';
 import SlideItem from './SlideItem';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Common } from '@styles/globalStyle';
-
-const storeList = [
-  {
-    key: 1,
-    category: '토스트',
-    title: '이삭토스트',
-    address: '경기 용인시 수지구 용구대로 2770',
-  },
-  {
-    key: 2,
-    category: '족발/보쌈',
-    title: '장충동 왕족발',
-    address: '경기 용인시 수지구 용구대로 2770',
-  },
-  {
-    key: 3,
-    category: '햄버거',
-    title: '버거킹',
-    address: '경기 용인시 수지구 용구대로 2770',
-  },
-  {
-    key: 4,
-    category: '햄버거',
-    title: '맥도날드',
-    address: '경기 용인시 수지구 용구대로 2770',
-  },
-];
+import { storeList } from './data';
 
 const Swiper = () => {
+  const [carouselList, setCarouselList] = useState(storeList);
   const [slideNumber, setItemNumber] = useState<number>(1);
+  const [isEndSlide, setIsEndSlide] = useState(false);
+
+  //자동으로 3초에 한번 슬라이드 넘어가는 코드
+  // setInterval(() => {
+  //   if (slideNumber === storeList.length) {
+  //     setItemNumber(1);
+  //   } else {
+  //     setItemNumber(slideNumber + 1);
+  //   }
+  // }, 3000);
+
+  useEffect(() => {
+    const startData = storeList[0];
+    const endData = storeList[storeList.length - 1];
+    const newList = [endData, ...storeList, startData];
+    setCarouselList(newList);
+  }, [storeList]);
+
+  const moveToNthSlide = (index: number) => {
+    setTimeout(() => {
+      setItemNumber(index);
+      setIsEndSlide(true);
+    }, 500);
+  };
+
+  const clickRightArrow = () => {
+    if (slideNumber === carouselList.length - 2) {
+      setItemNumber(slideNumber + 1);
+      moveToNthSlide(1);
+    } else {
+      if (isEndSlide) setIsEndSlide(false);
+      setItemNumber(slideNumber + 1);
+    }
+  };
 
   const clickLeftArrow = () => {
     if (slideNumber === 1) {
-      setItemNumber(storeList.length);
+      setItemNumber(slideNumber - 1);
+      moveToNthSlide(carouselList.length - 2);
     } else {
+      if (isEndSlide) setIsEndSlide(false);
       setItemNumber(slideNumber - 1);
     }
   };
 
-  const clickRightArrow = () => {
-    if (slideNumber === storeList.length) {
-      setItemNumber(1);
-    } else {
-      setItemNumber(slideNumber + 1);
-    }
-  };
   return (
     <SwiperWrapper>
       <LeftArrow onClick={() => clickLeftArrow()}>&lt;</LeftArrow>
-      <Slide slideNumber={slideNumber}>
-        {storeList.map((store) => (
+      <Slide slideNumber={slideNumber} endSlide={isEndSlide}>
+        {carouselList.map((store) => (
           <SlideItem
             key={store.key}
             category={store.category}
@@ -67,7 +71,7 @@ const Swiper = () => {
 };
 export default Swiper;
 const SwiperWrapper = styled.div`
-  width: 600px;
+  width: 530px;
   display: flex;
   align-items: center;
   border: 3px solid black;
@@ -75,12 +79,15 @@ const SwiperWrapper = styled.div`
   position: relative;
 `;
 
-const Slide = styled.div(({ slideNumber }: { slideNumber: number }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '10px',
-  transform: `translateX(calc(${slideNumber - 1}*-530px))`,
-}));
+const Slide = styled.div(
+  ({ slideNumber, endSlide }: { slideNumber: number; endSlide: boolean }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    // gap: '10px',
+    transform: `translateX(calc(${slideNumber}*-530px))`,
+    transition: endSlide ? '' : 'all 0.5s ease-in-out',
+  }),
+);
 
 const LeftArrow = styled.div`
   font-size: 30px;
