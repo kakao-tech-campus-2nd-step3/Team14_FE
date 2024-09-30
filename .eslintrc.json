@@ -3,7 +3,6 @@
     "browser": true,
     "es2021": true
   },
-  //airbnb사용, prettier과 충돌 나는것은 무시
   "extends": ["plugin:react/recommended", "airbnb", "prettier"],
   "parser": "@typescript-eslint/parser",
   "rules": {
@@ -11,7 +10,6 @@
     "arrow-body-style": ["error", "as-needed"],
     "requireReturnForObjectLiteral": true,
     "react/react-in-jsx-scope": "off",
-    //tsx내에서도 jsx문법 사용 가능하게 해줌
     "react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }],
     "import/extensions": [
       "error",
