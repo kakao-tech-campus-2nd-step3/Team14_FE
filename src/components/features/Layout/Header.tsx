@@ -39,6 +39,7 @@ export const Header: React.FC = () => {
 };
 
 const Wrapper = styled.header`
+  box-sizing: border-box;
   position: fixed;
   z-index: ${Common.zIndex.header};
   width: 100%;
