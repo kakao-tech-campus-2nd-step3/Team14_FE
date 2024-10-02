@@ -69,7 +69,6 @@ const LogoWrapper = styled.a`
   display: flex;
   align-items: center;
   text-decoration: none;
-  margin-left: -80px;
 `;
 
 const Logo = styled.img`
