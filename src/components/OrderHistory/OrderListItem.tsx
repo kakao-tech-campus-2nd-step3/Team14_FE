@@ -1,7 +1,18 @@
-import React from 'react';
 import styled from '@emotion/styled';
 
-const OrderListItem = () => {
+interface Props {
+  category: string;
+  storeName: string;
+  pickUpLocation: string;
+  price: number;
+}
+
+const OrderListItem = ({
+  category,
+  storeName,
+  pickUpLocation,
+  price,
+}: Props) => {
   return (
     <Wrapper>
       <img src="/image/restaurant.png" alt="식당 이미지" />
@@ -11,12 +22,14 @@ const OrderListItem = () => {
           <ProgressLabel>진행중</ProgressLabel>
         </div>
 
-        <Title>[토스트] 이삭토스트</Title>
+        <Title>
+          [{category}] {storeName}
+        </Title>
         <span style={{ color: '#7E7E7E' }}>
           주문 날짜: 2024-08-13 <br />
-          픽업장소: 경기 용인시 수지구 용구대로 2770
+          픽업장소: {pickUpLocation}
           <br />
-          결제금액: 11,900P
+          결제금액: {price}P
         </span>
       </Container>
     </Wrapper>
@@ -26,7 +39,7 @@ const OrderListItem = () => {
 export default OrderListItem;
 
 const Wrapper = styled.div`
-  width: 50%;
+  width: 100%;
   display: flex;
   justify-content: center;
   border: 1px solid #c7c3c3;
