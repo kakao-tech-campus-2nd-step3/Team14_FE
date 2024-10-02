@@ -1,11 +1,10 @@
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Menubar from '@components/mypage/Menubar';
 import OrderListItem from '@components/OrderHistory/OrderListItem';
 
 import { orderList } from '@components/OrderHistory/data';
-// import { storeList } from '@components/spot/swiper/data';
 
 interface Post {
   category: string;
@@ -13,16 +12,47 @@ interface Post {
   pickUpLocation: string;
   price: number;
 }
+interface OrderHistory {
+  totalPages: number; //전체 페이지 수
+  totalElements: number; //전체 데이터 수
+  size: number; //페이지 당 보여줄 데이터 수
+}
 
 const OrderHistoryPage = () => {
+  const VIEW_PAGE_COUNT = 5;
+  const [currentPage, setCurrentPage] = useState(1);
   const posts: Post[] = orderList.content;
+  const orderHistory: OrderHistory = orderList;
+
+  const startIdx = (currentPage - 1) * orderHistory.size;
+  const endIdx = startIdx + orderHistory.size;
+  const currentPosts = posts.slice(startIdx, endIdx);
+
+  const pageNumbers = Array.from(
+    { length: orderHistory.totalPages },
+    (_, i) => i + 1,
+  );
+
+  const startPage =
+    Math.floor((currentPage - 1) / VIEW_PAGE_COUNT) * VIEW_PAGE_COUNT + 1;
+  const endPage = Math.min(
+    startPage + VIEW_PAGE_COUNT - 1,
+    orderHistory.totalPages,
+  );
+  const visiblePages = pageNumbers.slice(startPage - 1, endPage);
+
+  const handlePageChange = (page: number) => {
+    if (page >= 1 && page <= orderHistory.totalPages) {
+      setCurrentPage(page);
+    }
+  };
 
   return (
     <Wrapper>
       <InnerWrapper>
         <Menubar />
         <OrderListContainer>
-          {posts.map((post) => (
+          {currentPosts.map((post) => (
             <OrderListItem
               category={post.category}
               storeName={post.storeName}
@@ -31,6 +61,29 @@ const OrderHistoryPage = () => {
             />
           ))}
         </OrderListContainer>
+      </InnerWrapper>
+      <InnerWrapper>
+        <PagenationUl>
+          {startPage > 1 && (
+            <PrevBtn onClick={() => handlePageChange(currentPage - 1)}>
+              &lt; 이전
+            </PrevBtn>
+          )}
+          {visiblePages.map((page) => (
+            <PageNumber
+              key={page}
+              onClick={() => handlePageChange(page)}
+              isActive={page === currentPage}
+            >
+              {page}
+            </PageNumber>
+          ))}
+          {endPage < orderHistory.totalPages && (
+            <NextBtn onClick={() => handlePageChange(currentPage + 1)}>
+              다음 &gt;
+            </NextBtn>
+          )}
+        </PagenationUl>
       </InnerWrapper>
     </Wrapper>
   );
@@ -41,7 +94,8 @@ export default OrderHistoryPage;
 const Wrapper = styled.div`
   width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const InnerWrapper = styled.div`
@@ -50,4 +104,27 @@ const InnerWrapper = styled.div`
 
 const OrderListContainer = styled.div`
   width: 100%;
+`;
+const PagenationUl = styled.ul`
+  width: 100%;
+  list-style: none;
+  margin: 40px 0;
+  padding-inline-start: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const PrevBtn = styled.li`
+  cursor: pointer;
+`;
+
+const NextBtn = styled.li`
+  cursor: pointer;
+`;
+
+const PageNumber = styled.li<{ isActive: boolean }>`
+  cursor: pointer;
+  padding: 0 10px;
+  font-weight: ${(props) => (props.isActive ? 'bold' : 'normal')};
+  color: ${(props) => (props.isActive ? '#000' : '#ccc')};
 `;
