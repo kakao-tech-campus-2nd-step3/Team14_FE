@@ -113,18 +113,32 @@ const PagenationUl = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 20px;
+  color: #7e7e7e;
 `;
 const PrevBtn = styled.li`
   cursor: pointer;
+  margin-right: 10px;
+  font-weight: bold;
 `;
 
 const NextBtn = styled.li`
   cursor: pointer;
+  margin-left: 10px;
+  font-weight: bold;
 `;
 
 const PageNumber = styled.li<{ isActive: boolean }>`
+  box-sizing: border-box;
+  width: 35px;
+  height: 35px;
+  margin: 0 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
   cursor: pointer;
-  padding: 0 10px;
-  font-weight: ${(props) => (props.isActive ? 'bold' : 'normal')};
-  color: ${(props) => (props.isActive ? '#000' : '#ccc')};
+  color: ${(props) => (props.isActive ? '#FFF' : '#7E7E7E')};
+  background-color: ${(props) => (props.isActive ? '#059770' : null)};
+  border-radius: 50%;
 `;
