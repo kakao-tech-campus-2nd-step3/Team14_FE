@@ -1,15 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from '@emotion/styled';
 import Button from '../../common/Button/Button';
 import { Common } from '../../../styles/globalStyle';
+import { LocationContext } from '@provider/Location';
 
 export const HEADER_HEIGHT = '64px';
 
 export const Header: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
+  const { setLocation } = useContext(LocationContext);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const getLocation = () => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const { latitude, longitude } = position.coords;
+      setLocation({ lat: latitude, lng: longitude });
+    });
   };
 
   return (
@@ -27,7 +36,9 @@ export const Header: React.FC = () => {
             </Dropdown>
             <DropdownMenu isOpen={isDropdownOpen}>
               <DropdownItem>용봉동</DropdownItem>
-              <DropdownItem transparent>내 동네 설정</DropdownItem>
+              <DropdownItem transparent onClick={() => getLocation()}>
+                내 동네 설정
+              </DropdownItem>
             </DropdownMenu>
           </DropdownContainer>
         </HeaderLeft>
