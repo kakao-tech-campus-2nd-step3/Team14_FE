@@ -68,22 +68,23 @@ const Swiper = () => {
 };
 export default Swiper;
 const SwiperWrapper = styled.div`
-  width: 600px;
+  width: 100%;
   display: flex;
   align-items: center;
   overflow: hidden;
   position: relative;
-  padding: 30px;
+  padding: 30px 0;
 `;
 
 const Slide = styled.div(
   ({ slideNumber, endSlide }: { slideNumber: number; endSlide: boolean }) => ({
+    width: '90%',
     display: 'flex',
     alignItems: 'center',
     transform:
       slideNumber === 1
-        ? `translateX(calc(${slideNumber}*-420px))`
-        : `translateX(calc(-420px + ${slideNumber - 1}*-480px))`,
+        ? `translateX(calc(-80%))`
+        : `translateX(calc(-80% + -${slideNumber - 1}*90%))`,
     transition: endSlide ? '' : 'all 0.5s ease-in-out',
   }),
 );
@@ -93,7 +94,7 @@ const LeftArrow = styled.div`
   cursor: pointer;
   position: absolute;
   left: 30px;
-  top: 40%;
+  top: 30%;
   z-index: ${Common.zIndex.common};
 `;
 
@@ -102,5 +103,6 @@ const RightArrow = styled.div`
   cursor: pointer;
   position: absolute;
   right: 30px;
-  top: 40%;
+  top: 30%;
+  z-index: ${Common.zIndex.common};
 `;

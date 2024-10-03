@@ -24,7 +24,8 @@ const SlideItem = ({ category, title, address, center, endSlide }: Props) => {
 };
 const Container = styled.div(
   (props: { isCenter: boolean; isEndSlide: boolean }) => ({
-    width: '520px',
+    flexShrink: 0,
+    width: '100%',
     height: '200px',
     display: 'flex',
     justifyContent: 'center',
@@ -33,7 +34,7 @@ const Container = styled.div(
     backgroundColor: '#fff',
     opacity: '0.8',
     boxShadow: '0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
-    margin: '0 -20px',
+    margin: '0 -5%',
     zIndex: props.isCenter ? Common.zIndex.common : '',
     transform: props.isCenter ? 'translateY(-25px)' : '',
     transition: props.isEndSlide ? '' : 'all 0.5s ease-in-out',
