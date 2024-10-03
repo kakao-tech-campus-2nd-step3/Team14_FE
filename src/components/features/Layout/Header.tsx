@@ -50,6 +50,7 @@ export const Header: React.FC = () => {
 };
 
 const Wrapper = styled.header`
+  box-sizing: border-box;
   position: fixed;
   z-index: ${Common.zIndex.header};
   width: 100%;
@@ -79,7 +80,6 @@ const LogoWrapper = styled.a`
   display: flex;
   align-items: center;
   text-decoration: none;
-  margin-left: -80px;
 `;
 
 const Logo = styled.img`
