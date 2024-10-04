@@ -6,17 +6,8 @@ import { storeList } from './data';
 
 const Swiper = () => {
   const [carouselList, setCarouselList] = useState(storeList);
-  const [slideNumber, setItemNumber] = useState<number>(1);
+  const [slideNumber, setSlideNumber] = useState<number>(1);
   const [isEndSlide, setIsEndSlide] = useState(false);
-
-  //자동으로 3초에 한번 슬라이드 넘어가는 코드
-  // setInterval(() => {
-  //   if (slideNumber === storeList.length) {
-  //     setItemNumber(1);
-  //   } else {
-  //     setItemNumber(slideNumber + 1);
-  //   }
-  // }, 3000);
 
   useEffect(() => {
     const startData = storeList[0];
@@ -27,28 +18,28 @@ const Swiper = () => {
 
   const moveToNthSlide = (index: number) => {
     setTimeout(() => {
-      setItemNumber(index);
+      setSlideNumber(index);
       setIsEndSlide(true);
     }, 500);
   };
 
   const clickRightArrow = () => {
     if (slideNumber === carouselList.length - 2) {
-      setItemNumber(slideNumber + 1);
+      setSlideNumber(slideNumber + 1);
       moveToNthSlide(1);
     } else {
       if (isEndSlide) setIsEndSlide(false);
-      setItemNumber(slideNumber + 1);
+      setSlideNumber(slideNumber + 1);
     }
   };
 
   const clickLeftArrow = () => {
     if (slideNumber === 1) {
-      setItemNumber(slideNumber - 1);
+      setSlideNumber(slideNumber - 1);
       moveToNthSlide(carouselList.length - 2);
     } else {
       if (isEndSlide) setIsEndSlide(false);
-      setItemNumber(slideNumber - 1);
+      setSlideNumber(slideNumber - 1);
     }
   };
 
@@ -56,14 +47,20 @@ const Swiper = () => {
     <SwiperWrapper>
       <LeftArrow onClick={() => clickLeftArrow()}>&lt;</LeftArrow>
       <Slide slideNumber={slideNumber} endSlide={isEndSlide}>
-        {carouselList.map((store) => (
-          <SlideItem
-            key={store.key}
-            category={store.category}
-            title={store.title}
-            address={store.address}
-          />
-        ))}
+        {carouselList.map((store, index) => {
+          let isCenter = false;
+          if (index === slideNumber) isCenter = true;
+          return (
+            <SlideItem
+              key={store.key}
+              category={store.category}
+              title={store.storeName}
+              address={store.pickUpLocation}
+              center={isCenter}
+              endSlide={isEndSlide}
+            />
+          );
+        })}
       </Slide>
       <RightArrow onClick={() => clickRightArrow()}>&gt;</RightArrow>
     </SwiperWrapper>
@@ -71,20 +68,23 @@ const Swiper = () => {
 };
 export default Swiper;
 const SwiperWrapper = styled.div`
-  width: 530px;
+  width: 100%;
   display: flex;
   align-items: center;
-  border: 3px solid black;
   overflow: hidden;
   position: relative;
+  padding: 30px 0;
 `;
 
 const Slide = styled.div(
   ({ slideNumber, endSlide }: { slideNumber: number; endSlide: boolean }) => ({
+    width: '90%',
     display: 'flex',
     alignItems: 'center',
-    // gap: '10px',
-    transform: `translateX(calc(${slideNumber}*-530px))`,
+    transform:
+      slideNumber === 1
+        ? `translateX(calc(-80%))`
+        : `translateX(calc(-80% + -${slideNumber - 1}*90%))`,
     transition: endSlide ? '' : 'all 0.5s ease-in-out',
   }),
 );
@@ -93,7 +93,8 @@ const LeftArrow = styled.div`
   font-size: 30px;
   cursor: pointer;
   position: absolute;
-  left: 0;
+  left: 30px;
+  top: 30%;
   z-index: ${Common.zIndex.common};
 `;
 
@@ -101,5 +102,7 @@ const RightArrow = styled.div`
   font-size: 30px;
   cursor: pointer;
   position: absolute;
-  right: 0;
+  right: 30px;
+  top: 30%;
+  z-index: ${Common.zIndex.common};
 `;

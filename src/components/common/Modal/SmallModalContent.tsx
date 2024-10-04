@@ -1,32 +1,27 @@
 import styled from '@emotion/styled';
 import { Common } from '@styles/globalStyle';
-import Button from '../Button/Button';
 
 interface Props {
   content: string;
-  onRequestClose: () => void;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
-const AlertDialog = ({ content, onRequestClose }: Props) => {
+const SmallModalContent = ({ content, setIsOpen }: Props) => {
   return (
     <div>
       <Content>{content}</Content>
       <Wrapper>
-        <Button
-          label="취소"
-          onClick={onRequestClose}
-          bgColor={Common.colors.primary05}
-        />
-        <Button label="확인" bgColor={Common.colors.primary} />
+        <Button cancle onClick={() => setIsOpen(false)}>
+          취소
+        </Button>
+        <Button>확인</Button>
       </Wrapper>
     </div>
   );
 };
-
 const Content = styled.div`
   font-size: 24px;
   margin-bottom: 20px;
 `;
-
 const Wrapper = styled.div`
   position: absolute;
   bottom: 30px;
@@ -35,9 +30,8 @@ const Wrapper = styled.div`
   gap: 10px;
   justify-content: end;
 `;
-
-// TODO:Button컴포넌트 style 물어본 뒤에 지울 코드
-const Button1 = styled.div((props: { cancle?: boolean }) => ({
+// TODO:버튼 컴포넌트 생선 전 임시로 사용
+const Button = styled.div((props: { cancle?: boolean }) => ({
   borderRadius: '20px',
   backgroundColor: props.cancle
     ? `${Common.colors.primary05}`
@@ -54,4 +48,4 @@ const Button1 = styled.div((props: { cancle?: boolean }) => ({
   },
 }));
 
-export default AlertDialog;
+export default SmallModalContent;
