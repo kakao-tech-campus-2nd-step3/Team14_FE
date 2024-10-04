@@ -1,19 +1,22 @@
 import styled from '@emotion/styled';
 import { Common } from '@styles/globalStyle';
+import Button from '../Button/Button';
 
 interface Props {
   content: string;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  onRequestClose: () => void;
 }
-const AlertDialog = ({ content, setIsOpen }: Props) => {
+const AlertDialog = ({ content, onRequestClose }: Props) => {
   return (
     <div>
       <Content>{content}</Content>
       <Wrapper>
-        <Button cancle onClick={() => setIsOpen(false)}>
-          취소
-        </Button>
-        <Button>확인</Button>
+        <Button
+          label="취소"
+          onClick={onRequestClose}
+          bgColor={Common.colors.primary05}
+        />
+        <Button label="확인" bgColor={Common.colors.primary} />
       </Wrapper>
     </div>
   );
@@ -33,8 +36,8 @@ const Wrapper = styled.div`
   justify-content: end;
 `;
 
-// TODO:버튼 컴포넌트 생성 전 임시로 사용
-const Button = styled.div((props: { cancle?: boolean }) => ({
+// TODO:Button컴포넌트 style 물어본 뒤에 지울 코드
+const Button1 = styled.div((props: { cancle?: boolean }) => ({
   borderRadius: '20px',
   backgroundColor: props.cancle
     ? `${Common.colors.primary05}`
