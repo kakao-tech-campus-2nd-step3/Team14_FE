@@ -43,6 +43,7 @@ const Overlay = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: ${Common.zIndex.common};
 `;
 
 const ModalBox = styled.div((props: { size: 'small' | 'big' }) => ({
