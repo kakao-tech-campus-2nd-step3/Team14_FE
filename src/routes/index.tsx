@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import Layout from '@components/features/Layout/Layout';
 import IntroducePage from '@pages/Introduce';
-import MainPage from '@pages/MainPage';
+import SpotPage from '@pages/SpotPage';
 import LoginPage from '@pages/LoginPage';
 import SignupPage from '@pages/SignupPage';
 import MyPage from '@pages/MyPage';
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
       },
       {
         path: RouterPath.main,
-        element: <MainPage />,
+        element: <SpotPage />,
       },
       {
         path: RouterPath.login,

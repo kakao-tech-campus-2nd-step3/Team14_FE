@@ -1,10 +1,12 @@
+import Modal from '@components/common/Modal';
+import AlertDialog from '@components/common/Modal/AlertDialog';
 import { HEADER_HEIGHT } from '@components/features/Layout/Header';
 import KakaoMap from '@components/spot/map';
 import Swiper from '@components/spot/swiper';
 import styled from '@emotion/styled';
 import { Common } from '@styles/globalStyle';
 
-const MainPage = () => (
+const SpotPage = () => (
   <Wrapper>
     <LeftWrapper>
       <Swiper />
@@ -13,7 +15,7 @@ const MainPage = () => (
   </Wrapper>
 );
 
-export default MainPage;
+export default SpotPage;
 
 const Wrapper = styled.div`
   max-width: 1700px;
