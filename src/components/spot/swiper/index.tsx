@@ -48,15 +48,13 @@ const Swiper = () => {
       <LeftArrow onClick={() => clickLeftArrow()}>&lt;</LeftArrow>
       <Slide slideNumber={slideNumber} endSlide={isEndSlide}>
         {carouselList.map((store, index) => {
-          let isCenter = false;
-          if (index === slideNumber) isCenter = true;
           return (
             <SlideItem
               key={store.key}
               category={store.category}
               title={store.storeName}
               address={store.pickUpLocation}
-              center={isCenter}
+              center={index === slideNumber}
               endSlide={isEndSlide}
             />
           );
