@@ -30,7 +30,7 @@ const Wrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 40px 15% 50px;
+  padding: 60px 15% 80px;
 `;
 
 const LinkStyle = styled(Link)<{ isActive: boolean }>`
