@@ -21,11 +21,12 @@ export default PointListItem;
 
 const Container = styled.div`
   position: relative;
-  width: 80%;
+  width: 100%;
   display: flex;
   align-items: center;
   padding: 10px 30px;
   border-top: 1px solid #ccc;
+  box-sizing: border-box;
 `;
 
 const DateTitle = styled.p`
