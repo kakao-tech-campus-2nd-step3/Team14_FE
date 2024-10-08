@@ -11,6 +11,8 @@ export const Common = {
     primary05: 'rgba(5,151,112,.5)',
     yellow: '#F1CF06',
     yellowBg: '#F7F7F7',
+    button2: '#73BEAA', //이름을 뭐로 해야될지 모르겠음..
+    button3: '#D9D9D9',
   },
   zIndex: {
     common: 100,
