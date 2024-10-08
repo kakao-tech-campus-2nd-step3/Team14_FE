@@ -11,6 +11,7 @@ export const Common = {
     primary05: 'rgba(5,151,112,.5)',
     yellow: '#F1CF06',
     yellowBg: '#F7F7F7',
+    lightGray: '#BBB',
   },
   zIndex: {
     common: 100,
