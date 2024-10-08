@@ -1,7 +1,7 @@
 export const RouterPath = {
   root: '/',
-  introtuce: '/',
-  main: '/spot',
+  introduce: '/',
+  spot: '/spot',
   login: '/login',
   signup: '/signup',
   myPage: '/mypage',
