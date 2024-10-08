@@ -5,10 +5,13 @@ import { Common } from '@styles/globalStyle';
 
 import Menubar from '@components/mypage/Menubar';
 import Button from '@components/common/Button/Button';
+import InputField from '@components/common/Input/InputField';
 
 const MyPage = () => {
   const [isEdit, setIsEdit] = useState(false);
-  const editMode = () => {};
+  const editMode = () => {
+    setIsEdit(!isEdit);
+  };
 
   return (
     <Wrapper>
@@ -21,28 +24,55 @@ const MyPage = () => {
           </MyPageContainerTop>
           <MyPageContainerMiddle>
             <MyPageInfoDescription>
-              <LeftContent>닉네임</LeftContent>
+              {isEdit ? (
+                <LeftContent>닉네임 변경</LeftContent>
+              ) : (
+                <LeftContent>닉네임</LeftContent>
+              )}
               <br />
-              <LeftContent>전화번호</LeftContent>
+              {isEdit ? (
+                <LeftContent>전화번호 변경</LeftContent>
+              ) : (
+                <LeftContent>전화번호</LeftContent>
+              )}
             </MyPageInfoDescription>
             <MyPageInfo>
-              <RightContent>우먹마</RightContent>
+              {isEdit ? (
+                <InputField width="65%" bgColor="#EDEDED" />
+              ) : (
+                <RightContent>우먹마</RightContent>
+              )}
               <br />
-              <RightContent>010-0000-0000</RightContent>
+              {isEdit ? (
+                <InputField width="65%" bgColor="#EDEDED" />
+              ) : (
+                <RightContent>010-0000-0000</RightContent>
+              )}
             </MyPageInfo>
           </MyPageContainerMiddle>
           <MyPageContainerBottom>
-            <Button
-              label="수정하기"
-              bgColor={Common.colors.button2}
-              radius="20px"
-            />
-            <Button
-              label="탈퇴하기"
-              bgColor={Common.colors.button3}
-              onClick={editMode}
-              radius="20px"
-            />
+            {isEdit ? (
+              <Button
+                label="저장하기"
+                bgColor={Common.colors.primary}
+                onClick={editMode}
+                radius="20px"
+              />
+            ) : (
+              <>
+                <Button
+                  label="수정하기"
+                  bgColor={Common.colors.button2}
+                  onClick={editMode}
+                  radius="20px"
+                />
+                <Button
+                  label="탈퇴하기"
+                  bgColor={Common.colors.button3}
+                  radius="20px"
+                />
+              </>
+            )}
           </MyPageContainerBottom>
         </MyPageContainer>
       </InnerWrapper>
