@@ -8,7 +8,9 @@ const PointListItem = () => {
       <DateTitle>08.13</DateTitle>
       <DetailContainer>
         <Point>20,000P</Point>
-        <Time>19:25</Time>
+        <PointInfo>
+          <Time>19:25 충전</Time>
+        </PointInfo>
       </DetailContainer>
       <CloseDiv>
         <IoClose size="30px" color="#6A6863" />
@@ -46,6 +48,11 @@ const Point = styled.span`
   font-weight: bold;
   margin-bottom: 5px;
 `;
+const PointInfo = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const Time = styled.span`
   font-size: 13px;
   color: #909090;
