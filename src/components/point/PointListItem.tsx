@@ -2,14 +2,26 @@ import styled from '@emotion/styled';
 
 import { IoClose } from 'react-icons/io5';
 
-const PointListItem = () => {
+interface Props {
+  date: string;
+  point: number;
+  filter: string;
+}
+
+const PointListItem = ({ date, point, filter }: Props) => {
+  const newDate: string[] = date.split('T')[0].split('-');
+  const newTime: string[] = date.split('T')[1].split(':');
+  const newPoint: string = point.toLocaleString('ko-KR');
+
   return (
     <Container>
-      <DateTitle>08.13</DateTitle>
+      <DateTitle>{newDate[1] + '.' + newDate[2]}</DateTitle>
       <DetailContainer>
-        <Point>20,000P</Point>
+        <Point>{newPoint}P</Point>
         <PointInfo>
-          <Time>19:25 충전</Time>
+          <Time>
+            {newTime[0] + ':' + newTime[1]} {filter}
+          </Time>
         </PointInfo>
       </DetailContainer>
       <CloseDiv>
