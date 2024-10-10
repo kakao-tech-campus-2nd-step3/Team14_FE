@@ -7,16 +7,15 @@ const StoreList = () => {
   return (
     <Wrapper>
       {storeList.map((store) => (
-        <>
+        <div key={store.key}>
           <Store
-            key={store.key}
             image={store.image}
             category={store.category}
             storeName={store.storeName}
             address={store.pickUpLocation}
           />
           <Line />
-        </>
+        </div>
       ))}
     </Wrapper>
   );

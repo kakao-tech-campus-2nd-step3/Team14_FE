@@ -13,8 +13,12 @@ const Swiper = () => {
   const [isEndSlide, setIsEndSlide] = useState(false);
 
   useEffect(() => {
-    const startData = storeList[0];
-    const endData = storeList[storeList.length - 1];
+    const startData = { ...storeList[0] };
+    const endData = { ...storeList[storeList.length - 1] };
+
+    startData.key = startData.key + '_fake';
+    endData.key = endData.key + '_fake';
+
     const newList = [endData, ...storeList, startData];
     setCarouselList(newList);
   }, [storeList]);

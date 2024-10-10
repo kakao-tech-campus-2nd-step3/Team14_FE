@@ -4,7 +4,6 @@ import styled from '@emotion/styled';
 import { Common } from '@styles/globalStyle';
 
 interface Props {
-  key: number;
   image: string;
   storeName: string;
   address: string;

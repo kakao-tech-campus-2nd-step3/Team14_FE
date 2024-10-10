@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { Common } from '@styles/globalStyle';
 
 interface Props {
-  key: number;
+  key: string;
   category: string;
   title: string;
   address: string;
