@@ -8,7 +8,7 @@ export const HEADER_HEIGHT = '64px';
 
 export const Header: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
-  const { setLocation } = useContext(LocationContext);
+  const { location, setLocation } = useContext(LocationContext);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -17,7 +17,19 @@ export const Header: React.FC = () => {
   const getLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
-      setLocation({ lat: latitude, lng: longitude });
+
+      const geocoder = new kakao.maps.services.Geocoder();
+
+      geocoder.coord2Address(longitude, latitude, (result, status) => {
+        if (status === kakao.maps.services.Status.OK) {
+          setLocation({
+            dong: result[0].address.region_3depth_name,
+            lat: latitude,
+            lng: longitude,
+          });
+          localStorage.setItem('location', JSON.stringify(location));
+        }
+      });
     });
   };
 
@@ -32,10 +44,10 @@ export const Header: React.FC = () => {
 
           <DropdownContainer>
             <Dropdown onClick={toggleDropdown}>
-              용봉동 {isDropdownOpen ? '▲' : '▼'}
+              {location.dong} {isDropdownOpen ? '▲' : '▼'}
             </Dropdown>
             <DropdownMenu isOpen={isDropdownOpen}>
-              <DropdownItem>용봉동</DropdownItem>
+              <DropdownItem>{location.dong}</DropdownItem>
               <DropdownItem transparent onClick={() => getLocation()}>
                 내 동네 설정
               </DropdownItem>
