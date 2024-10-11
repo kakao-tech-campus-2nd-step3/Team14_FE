@@ -16,7 +16,6 @@ const SpotPage = () => (
       </TitleWrapper>
       <Swiper />
       <Line />
-      {/* TODO: 카테고리 */}
       <StoreList />
     </LeftWrapper>
     <KakaoMap />
