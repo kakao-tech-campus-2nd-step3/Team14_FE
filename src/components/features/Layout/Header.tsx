@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { LocationContext } from '@provider/Location';
 import Button from '@components/common/Button';
 import { Common } from '@styles/globalStyle';
+import { useNavigate } from 'react-router-dom';
 
 export const HEADER_HEIGHT = '64px';
 
@@ -17,6 +18,8 @@ interface DropdownItemProps {
 export const Header: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
   const { location, setLocation } = useContext(LocationContext);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -48,6 +51,22 @@ export const Header: React.FC = () => {
     });
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
     <Wrapper>
       <Container>
@@ -57,7 +76,7 @@ export const Header: React.FC = () => {
             <Location>요기 먹때</Location>
           </LogoWrapper>
 
-          <DropdownContainer>
+          <DropdownContainer ref={dropdownRef}>
             <Dropdown onClick={toggleDropdown}>
               {location.dong} {isDropdownOpen ? '▲' : '▼'}
             </Dropdown>
@@ -70,7 +89,12 @@ export const Header: React.FC = () => {
           </DropdownContainer>
         </HeaderLeft>
 
-        <Button label="로그인" bgColor="#ffd500" radius="5px" />
+        <Button
+          label="로그인"
+          bgColor="#ffd500"
+          radius="5px"
+          onClick={() => navigate('/login')}
+        />
       </Container>
     </Wrapper>
   );
