@@ -1,20 +1,21 @@
 import { LocationContext } from '@provider/Location';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { BsPlusCircleFill } from 'react-icons/bs';
 import styled from 'styled-components';
 import { Common } from '@styles/globalStyle';
+import Modal from '@components/common/Modal';
 
 const KakaoMap = () => {
   const { location } = useContext(LocationContext);
-
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <Map
       center={{ lat: location.lat, lng: location.lng }}
       style={{ width: '100%', height: '100%' }}
       level={3}
     >
-      <PlusBtn>
+      <PlusBtn onClick={() => setIsOpen(true)}>
         <BsPlusCircleFill size="50" />
       </PlusBtn>
       <MapMarker
@@ -22,6 +23,13 @@ const KakaoMap = () => {
           lat: location.lat,
           lng: location.lng,
         }}
+      />
+      <Modal
+        size="big"
+        isOpen={isOpen}
+        onRequestClose={() => setIsOpen(false)}
+        title="모집"
+        content={<div></div>}
       />
     </Map>
   );
