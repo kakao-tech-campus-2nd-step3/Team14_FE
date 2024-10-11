@@ -15,15 +15,14 @@ import { RouterPath } from './path';
 
 const router = createBrowserRouter([
   {
-    path: RouterPath.root,
     element: <Layout />,
     children: [
       {
-        path: RouterPath.introtuce,
+        index: true,
         element: <IntroducePage />,
       },
       {
-        path: RouterPath.main,
+        path: RouterPath.spot,
         element: <SpotPage />,
       },
       {
