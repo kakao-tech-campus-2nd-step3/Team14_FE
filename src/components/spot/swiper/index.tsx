@@ -4,14 +4,21 @@ import { useEffect, useState } from 'react';
 import { Common } from '@styles/globalStyle';
 import { storeList } from './data';
 
+import { BsChevronLeft } from 'react-icons/bs';
+import { BsChevronRight } from 'react-icons/bs';
+
 const Swiper = () => {
   const [carouselList, setCarouselList] = useState(storeList);
   const [slideNumber, setSlideNumber] = useState<number>(1);
   const [isEndSlide, setIsEndSlide] = useState(false);
 
   useEffect(() => {
-    const startData = storeList[0];
-    const endData = storeList[storeList.length - 1];
+    const startData = { ...storeList[0] };
+    const endData = { ...storeList[storeList.length - 1] };
+
+    startData.key = startData.key + '_fake';
+    endData.key = endData.key + '_fake';
+
     const newList = [endData, ...storeList, startData];
     setCarouselList(newList);
   }, [storeList]);
@@ -45,7 +52,9 @@ const Swiper = () => {
 
   return (
     <SwiperWrapper>
-      <LeftArrow onClick={() => clickLeftArrow()}>&lt;</LeftArrow>
+      <LeftArrow onClick={() => clickLeftArrow()}>
+        <BsChevronLeft size="40" />
+      </LeftArrow>
       <Slide slideNumber={slideNumber} endSlide={isEndSlide}>
         {carouselList.map((store, index) => {
           return (
@@ -60,7 +69,9 @@ const Swiper = () => {
           );
         })}
       </Slide>
-      <RightArrow onClick={() => clickRightArrow()}>&gt;</RightArrow>
+      <RightArrow onClick={() => clickRightArrow()}>
+        <BsChevronRight size="40" />
+      </RightArrow>
     </SwiperWrapper>
   );
 };
@@ -92,7 +103,7 @@ const LeftArrow = styled.div`
   cursor: pointer;
   position: absolute;
   left: 30px;
-  top: 30%;
+  top: 35%;
   z-index: ${Common.zIndex.common};
 `;
 
@@ -101,6 +112,6 @@ const RightArrow = styled.div`
   cursor: pointer;
   position: absolute;
   right: 30px;
-  top: 30%;
+  top: 35%;
   z-index: ${Common.zIndex.common};
 `;
