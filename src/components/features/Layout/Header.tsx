@@ -27,7 +27,14 @@ export const Header: React.FC = () => {
             lat: latitude,
             lng: longitude,
           });
-          localStorage.setItem('location', JSON.stringify(location));
+          localStorage.setItem(
+            'location',
+            JSON.stringify({
+              dong: result[0].address.region_3depth_name,
+              lat: latitude,
+              lng: longitude,
+            }),
+          );
         }
       });
     });

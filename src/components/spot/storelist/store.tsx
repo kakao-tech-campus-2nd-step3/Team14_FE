@@ -18,7 +18,7 @@ const Store = ({ image, storeName, address, category }: Props) => {
         <Title>{storeName}</Title>
         주문마감 :<Address>픽업 | {address}</Address>
       </DescriptWrapper>
-      <Button label="선택" bgColor={Common.colors.primary} radius="15px" />
+      <Button label="선택" bgColor={Common.colors.primary} radius="20px" />
     </Wrapper>
   );
 };
@@ -26,11 +26,15 @@ export default Store;
 
 const Wrapper = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
   margin: 20px 40px;
 `;
 
-const DescriptWrapper = styled.div``;
+const DescriptWrapper = styled.div`
+  margin-right: 10px;
+`;
 
 const Category = styled.div`
   font-size: 20px;
