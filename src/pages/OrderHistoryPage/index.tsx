@@ -5,6 +5,7 @@ import Menubar from '@components/mypage/Menubar';
 import OrderListItem from '@components/OrderHistory/OrderListItem';
 
 import { orderList } from '@components/OrderHistory/data';
+import { HiChevronLeft, HiChevronRight } from 'react-icons/hi';
 
 interface Post {
   category: string;
@@ -66,7 +67,8 @@ const OrderHistoryPage = () => {
         <PagenationUl>
           {startPage > 1 && (
             <PrevBtn onClick={() => handlePageChange(currentPage - 1)}>
-              &lt; 이전
+              <HiChevronLeft />
+              이전
             </PrevBtn>
           )}
           {visiblePages.map((page) => (
@@ -80,7 +82,7 @@ const OrderHistoryPage = () => {
           ))}
           {endPage < orderHistory.totalPages && (
             <NextBtn onClick={() => handlePageChange(currentPage + 1)}>
-              다음 &gt;
+              다음 <HiChevronRight />
             </NextBtn>
           )}
         </PagenationUl>
@@ -117,12 +119,16 @@ const PagenationUl = styled.ul`
   color: #7e7e7e;
 `;
 const PrevBtn = styled.li`
+  display: flex;
+  align-items: center;
   cursor: pointer;
   margin-right: 10px;
   font-weight: bold;
 `;
 
 const NextBtn = styled.li`
+  display: flex;
+  align-items: center;
   cursor: pointer;
   margin-left: 10px;
   font-weight: bold;

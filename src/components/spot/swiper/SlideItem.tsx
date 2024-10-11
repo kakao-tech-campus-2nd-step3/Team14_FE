@@ -1,9 +1,10 @@
+import Logo from '@components/common/Logo';
 import styled from '@emotion/styled';
-import Logo from './Logo';
+
 import { Common } from '@styles/globalStyle';
 
 interface Props {
-  key: number;
+  key: string;
   category: string;
   title: string;
   address: string;

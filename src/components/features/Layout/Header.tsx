@@ -1,14 +1,25 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef, useEffect } from 'react';
 import styled from '@emotion/styled';
-import Button from '../../common/Button/Button';
-import { Common } from '../../../styles/globalStyle';
 import { LocationContext } from '@provider/Location';
+import Button from '@components/common/Button';
+import { Common } from '@styles/globalStyle';
+import { useNavigate } from 'react-router-dom';
 
 export const HEADER_HEIGHT = '64px';
 
+interface DropdownMenuProps {
+  isOpen: boolean;
+}
+
+interface DropdownItemProps {
+  transparent?: boolean;
+}
+
 export const Header: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
-  const { setLocation } = useContext(LocationContext);
+  const { location, setLocation } = useContext(LocationContext);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -17,9 +28,44 @@ export const Header: React.FC = () => {
   const getLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
-      setLocation({ lat: latitude, lng: longitude });
+
+      const geocoder = new kakao.maps.services.Geocoder();
+
+      geocoder.coord2Address(longitude, latitude, (result, status) => {
+        if (status === kakao.maps.services.Status.OK) {
+          setLocation({
+            dong: result[0].address.region_3depth_name,
+            lat: latitude,
+            lng: longitude,
+          });
+          localStorage.setItem(
+            'location',
+            JSON.stringify({
+              dong: result[0].address.region_3depth_name,
+              lat: latitude,
+              lng: longitude,
+            }),
+          );
+        }
+      });
     });
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <Wrapper>
@@ -27,15 +73,15 @@ export const Header: React.FC = () => {
         <HeaderLeft>
           <LogoWrapper href="/">
             <Logo src="/image/logo.png" alt="로고" />
-            <Location>여기먹때</Location>
+            <Location>요기 먹때</Location>
           </LogoWrapper>
 
-          <DropdownContainer>
+          <DropdownContainer ref={dropdownRef}>
             <Dropdown onClick={toggleDropdown}>
-              용봉동 {isDropdownOpen ? '▲' : '▼'}
+              {location.dong} {isDropdownOpen ? '▲' : '▼'}
             </Dropdown>
             <DropdownMenu isOpen={isDropdownOpen}>
-              <DropdownItem>용봉동</DropdownItem>
+              <DropdownItem>{location.dong}</DropdownItem>
               <DropdownItem transparent onClick={() => getLocation()}>
                 내 동네 설정
               </DropdownItem>
@@ -43,7 +89,12 @@ export const Header: React.FC = () => {
           </DropdownContainer>
         </HeaderLeft>
 
-        <Button label="로그인" bgColor="#ffd500" radius="5px" />
+        <Button
+          label="로그인"
+          bgColor="#ffd500"
+          radius="5px"
+          onClick={() => navigate('/login')}
+        />
       </Container>
     </Wrapper>
   );
@@ -104,14 +155,6 @@ const Dropdown = styled.div`
   padding: 15px;
 `;
 
-interface DropdownMenuProps {
-  isOpen: boolean;
-}
-
-interface DropdownItemProps {
-  transparent?: boolean;
-}
-
 const DropdownContainer = styled.div`
   position: relative;
 `;
@@ -140,3 +183,5 @@ const DropdownItem = styled.div<DropdownItemProps>`
     background-color: #f0f0f0;
   }
 `;
+
+export default Header;
