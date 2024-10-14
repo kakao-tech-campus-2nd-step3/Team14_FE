@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { Common } from '@styles/globalStyle';
 
 import Menubar from '@components/mypage/Menubar';
-import Button from '@components/common/Button/Button';
-import InputField from '@components/common/Input/InputField';
+import Button from '@components/common/Button';
+import InputField from '@components/common/InputField';
 
 const MyPage = () => {
   const [isEdit, setIsEdit] = useState(false);

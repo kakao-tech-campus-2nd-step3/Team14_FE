@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 import Menubar from '@components/mypage/Menubar';
 import PointListItem from '@components/point/PointListItem';
-import Button from '@components/common/Button/Button';
+import Button from '@components/common/Button';
 
 import { pointDataSet } from '@components/point/data';
 import { useState } from 'react';
