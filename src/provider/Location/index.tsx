@@ -21,12 +21,14 @@ const defaultLocation = {
 };
 
 export const LocationContext = createContext<LocationInfo>(defaultLocation);
+
 export const LocationProvider = ({ children }: { children: ReactNode }) => {
+  const DEFAULT_LOCATION =
+    '{"dong":"위치설정","lat": "33.450701", "lng": "126.570667"}';
+  const PRESENT_LOCATION = localStorage.getItem('location');
+
   const [location, setLocation] = useState(
-    JSON.parse(
-      localStorage.getItem('location') ||
-        '{"dong":"위치설정","lat": "33.450701", "lng": "126.570667"}',
-    ),
+    JSON.parse(PRESENT_LOCATION || DEFAULT_LOCATION),
   );
   return (
     <LocationContext.Provider value={{ location, setLocation }}>

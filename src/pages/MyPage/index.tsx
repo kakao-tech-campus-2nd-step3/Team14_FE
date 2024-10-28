@@ -1,11 +1,9 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
 
-import { Common } from '@styles/globalStyle';
-
 import Menubar from '@components/mypage/Menubar';
-import Button from '@components/common/Button/Button';
-import InputField from '@components/common/Input/InputField';
+import ProfileEdit from '@components/mypage/ProfileEdit';
+import Profile from '@components/mypage/Profile';
 
 const MyPage = () => {
   const [isEdit, setIsEdit] = useState(false);
@@ -22,58 +20,11 @@ const MyPage = () => {
             <ProfileImage src="/image/profile.jpg" alt="프로필 이미지" />
             <PointsBalance>잔여 포인트: 100,000P</PointsBalance>
           </MyPageContainerTop>
-          <MyPageContainerMiddle>
-            <MyPageInfoDescription>
-              {isEdit ? (
-                <LeftContent>닉네임 변경</LeftContent>
-              ) : (
-                <LeftContent>닉네임</LeftContent>
-              )}
-              <br />
-              {isEdit ? (
-                <LeftContent>전화번호 변경</LeftContent>
-              ) : (
-                <LeftContent>전화번호</LeftContent>
-              )}
-            </MyPageInfoDescription>
-            <MyPageInfo>
-              {isEdit ? (
-                <InputField width="65%" bgColor="#EDEDED" />
-              ) : (
-                <RightContent>우먹마</RightContent>
-              )}
-              <br />
-              {isEdit ? (
-                <InputField width="65%" bgColor="#EDEDED" />
-              ) : (
-                <RightContent>010-0000-0000</RightContent>
-              )}
-            </MyPageInfo>
-          </MyPageContainerMiddle>
-          <MyPageContainerBottom>
-            {isEdit ? (
-              <Button
-                label="저장하기"
-                bgColor={Common.colors.primary}
-                onClick={editMode}
-                radius="20px"
-              />
-            ) : (
-              <>
-                <Button
-                  label="수정하기"
-                  bgColor={Common.colors.button2}
-                  onClick={editMode}
-                  radius="20px"
-                />
-                <Button
-                  label="탈퇴하기"
-                  bgColor={Common.colors.button3}
-                  radius="20px"
-                />
-              </>
-            )}
-          </MyPageContainerBottom>
+          {isEdit ? (
+            <ProfileEdit editMode={editMode} />
+          ) : (
+            <Profile editMode={editMode} />
+          )}
         </MyPageContainer>
       </InnerWrapper>
     </Wrapper>
@@ -90,6 +41,7 @@ const Wrapper = styled.div`
 
 const InnerWrapper = styled.div`
   width: 60%;
+  margin-bottom: 20px;
 `;
 const MyPageContainer = styled.div`
   width: 100%;
@@ -110,36 +62,4 @@ const ProfileImage = styled.img`
 const PointsBalance = styled.p`
   font-size: 20px;
   font-weight: bold;
-`;
-
-const MyPageContainerMiddle = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 20px 0;
-`;
-
-const MyPageInfoDescription = styled.div`
-  width: 35%;
-`;
-const MyPageInfo = styled.div`
-  width: 65%;
-  margin-left: 30px;
-`;
-
-const LeftContent = styled.p`
-  font-size: 20px;
-  font-weight: bold;
-  text-align: end;
-`;
-
-const RightContent = styled.p`
-  font-size: 20px;
-  font-weight: bold;
-`;
-
-const MyPageContainerBottom = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 `;

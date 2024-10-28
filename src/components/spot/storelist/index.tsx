@@ -6,10 +6,11 @@ import SelectCategory from './selectCategory';
 import { useState } from 'react';
 
 const StoreList = () => {
-  const [category, setCategory] = useState('카테고리 선택');
+  const SELECT_CATEOGRY = '카테고리 선택';
+  const [category, setCategory] = useState(SELECT_CATEOGRY);
 
   const filterList =
-    category === '카테고리 선택'
+    category === SELECT_CATEOGRY
       ? storeList
       : storeList.filter((store) => category === store.category);
 
@@ -39,6 +40,8 @@ export default StoreList;
 const Wrapper = styled.div`
   height: 50%;
   width: 100%;
+  box-sizing: border-box;
+  padding: 0 40px;
   overflow: scroll;
   &::-webkit-scrollbar {
     display: none;

@@ -2,6 +2,7 @@
 /* eslint-disable react/require-default-props */
 import React from 'react';
 import styled from '@emotion/styled';
+import { Common } from '@styles/globalStyle';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
@@ -13,7 +14,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const Button: React.FC<ButtonProps> = ({
   label,
   onClick,
-  bgColor = '#ffd500',
+  bgColor = Common.colors.yellow,
   radius = '5px',
   padding = '9px 15px',
   ...rest
@@ -34,7 +35,7 @@ const StyledButton = styled.button<{
   radius: string;
   padding: string;
 }>`
-  background-color: ${(props) => props.bgColor || '#ffd500'};
+  background-color: ${(props) => props.bgColor || Common.colors.yellow};
   color: white;
   padding: ${(props) => props.padding || '9px 15px'};
   border: none;

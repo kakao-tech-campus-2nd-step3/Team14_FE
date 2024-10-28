@@ -2,15 +2,16 @@ import styled from '@emotion/styled';
 
 import Menubar from '@components/mypage/Menubar';
 import PointListItem from '@components/point/PointListItem';
-import Button from '@components/common/Button/Button';
+import Button from '@components/common/Button';
 
 import { pointDataSet } from '@components/point/data';
 import { useState } from 'react';
 
 const PointPage = () => {
-  const [pointFilterValue, setPointFilterValue] = useState('충전');
+  type PointFilter = '충전' | '결제' | '환전';
+  const [pointFilterValue, setPointFilterValue] = useState<PointFilter>('충전');
 
-  const changePointFilter = (filter: string) => {
+  const changePointFilter = (filter: PointFilter) => {
     setPointFilterValue(filter);
   };
   const filteredPointData = pointDataSet.filter(

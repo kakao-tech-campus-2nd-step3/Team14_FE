@@ -1,6 +1,7 @@
 /* eslint-disable react/require-default-props */
 import React from 'react';
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
 interface BackgroundProps {
   left?: boolean;
@@ -12,7 +13,7 @@ const Background: React.FC<BackgroundProps> = ({ left, children }) => (
     {children}
     {!left && (
       <ImageWrapper>
-        <Image src="/image/motocycle.png" alt="오토바이 이미지" />
+        <Image src="/image/motocycle.png" alt="오토바이" />
       </ImageWrapper>
     )}
   </StyledBackground>
@@ -20,15 +21,19 @@ const Background: React.FC<BackgroundProps> = ({ left, children }) => (
 
 export default Background;
 
-const StyledBackground = styled.div<{ left?: boolean }>`
-  width: ${(props) => (props.left ? '70%' : '30%')};
-  background-color: ${(props) => (props.left ? '#f3f3f3' : 'white')};
+const backgroundStyles = (left?: boolean) => css`
+  width: ${left ? '70%' : '30%'};
+  background-color: ${left ? '#f3f3f3' : 'white'};
   display: flex;
-  justify-content: ${(props) => (props.left ? 'flex-start' : 'center')};
-  align-items: ${(props) => (props.left ? 'flex-start' : 'flex-end')};
-  padding: ${(props) => (props.left ? '200px 180px' : '0')};
+  justify-content: ${left ? 'flex-start' : 'center'};
+  align-items: ${left ? 'flex-start' : 'flex-end'};
+  padding: ${left ? '200px 180px' : '0'};
   position: relative;
-  ${(props) => props.left && 'border-bottom-right-radius: 300px;'}
+  ${left && 'border-bottom-right-radius: 300px;'}
+`;
+
+const StyledBackground = styled.div<{ left?: boolean }>`
+  ${(props) => backgroundStyles(props.left)}
 `;
 
 const ImageWrapper = styled.div`

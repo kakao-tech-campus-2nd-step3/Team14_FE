@@ -6,7 +6,12 @@ export const RouterPath = {
   signup: '/signup',
   myPage: '/mypage',
   myPageOrderHistory: '/mypage/orderhistory',
-  myPageOrderDetail: '/mypage/orderdetail',
+  myPageOrderDetail: '/mypage/orderhistory/:orderId',
   myPagePoint: '/mypage/point',
   payment: '/payment',
+};
+
+export const getDynamicPath = {
+  orderDetail: (orderId: number) =>
+    RouterPath.myPageOrderDetail.replace(':orderId', orderId.toString()),
 };

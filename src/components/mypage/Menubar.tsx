@@ -12,7 +12,7 @@ export const Menubar = () => {
       </LinkStyle>
       <LinkStyle
         to="/mypage/orderhistory"
-        isActive={pagePath == '/mypage/orderhistory'}
+        isActive={/\/mypage\/orderhistory\/*/.test(pagePath)}
       >
         주문내역
       </LinkStyle>

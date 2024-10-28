@@ -18,7 +18,9 @@ const SpotPage = () => (
       <Line />
       <StoreList />
     </LeftWrapper>
-    <KakaoMap />
+    <RightWrapper>
+      <KakaoMap />
+    </RightWrapper>
   </Wrapper>
 );
 
@@ -59,4 +61,9 @@ const Impact = styled.span`
 const Line = styled.hr`
   border: 1px dashed ${Common.colors.lightGray};
   width: 100%;
+`;
+
+const RightWrapper = styled.div`
+  width: 75%;
+  position: relative;
 `;

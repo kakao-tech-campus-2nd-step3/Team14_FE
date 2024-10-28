@@ -23,7 +23,6 @@ const Selector = styled.select`
   border: none;
   border-bottom: 2px solid black;
   padding: 10px 0;
-  margin-left: 40px;
   background-color: transparent;
   font-family: PaperlogyMedium;
   font-size: 16px;

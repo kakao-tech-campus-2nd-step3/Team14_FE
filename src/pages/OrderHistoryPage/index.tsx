@@ -1,17 +1,20 @@
 import styled from '@emotion/styled';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import Menubar from '@components/mypage/Menubar';
 import OrderListItem from '@components/OrderHistory/OrderListItem';
 
 import { orderList } from '@components/OrderHistory/data';
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi';
+import { getDynamicPath } from '../../routes/path';
 
 interface Post {
+  id: number;
   category: string;
   storeName: string;
   pickUpLocation: string;
-  price: number;
+  price?: number;
 }
 interface OrderHistory {
   totalPages: number; //전체 페이지 수
@@ -54,12 +57,18 @@ const OrderHistoryPage = () => {
         <Menubar />
         <OrderListContainer>
           {currentPosts.map((post) => (
-            <OrderListItem
-              category={post.category}
-              storeName={post.storeName}
-              pickUpLocation={post.pickUpLocation}
-              price={post.price}
-            />
+            <Link
+              key={post.id}
+              to={getDynamicPath.orderDetail(post.id)}
+              style={{ textDecoration: 'none', color: '#000' }}
+            >
+              <OrderListItem
+                category={post.category}
+                storeName={post.storeName}
+                pickUpLocation={post.pickUpLocation}
+                price={post.price}
+              />
+            </Link>
           ))}
         </OrderListContainer>
       </InnerWrapper>

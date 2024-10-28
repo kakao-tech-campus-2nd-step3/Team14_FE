@@ -6,6 +6,7 @@ export const orderList = {
   size: 3,
   content: [
     {
+      id: 1,
       category: '패스트푸드',
       storeName: '버거킹전남대점',
       minimumOrderAmount: 3,
@@ -15,6 +16,7 @@ export const orderList = {
       isCreater: false,
     },
     {
+      id: 1,
       category: '패스트푸드',
       storeName: '버거킹전남대점',
       minimumOrderAmount: 3,
@@ -24,6 +26,7 @@ export const orderList = {
       isCreater: false,
     },
     {
+      id: 1,
       category: '패스트푸드',
       storeName: '버거킹전남대점',
       minimumOrderAmount: 3,
@@ -33,6 +36,7 @@ export const orderList = {
       isCreater: false,
     },
     {
+      id: 1,
       category: '패스트푸드',
       storeName: '버거킹전남대점',
       minimumOrderAmount: 3,
@@ -42,6 +46,7 @@ export const orderList = {
       isCreater: false,
     },
     {
+      id: 1,
       category: '패스트푸드',
       storeName: '버거킹전남대점',
       minimumOrderAmount: 3,
@@ -51,6 +56,7 @@ export const orderList = {
       isCreater: false,
     },
     {
+      id: 1,
       category: '패스트푸드',
       storeName: '버거킹전남대점',
       minimumOrderAmount: 3,
@@ -60,6 +66,7 @@ export const orderList = {
       isCreater: false,
     },
     {
+      id: 1,
       category: '패스트푸드',
       storeName: '버거킹전남대점',
       minimumOrderAmount: 3,
@@ -69,6 +76,7 @@ export const orderList = {
       isCreater: false,
     },
     {
+      id: 1,
       category: '패스트푸드',
       storeName: '버거킹전남대점',
       minimumOrderAmount: 3,
@@ -78,6 +86,7 @@ export const orderList = {
       isCreater: false,
     },
     {
+      id: 1,
       category: '패스트푸드',
       storeName: '버거킹전남대점',
       minimumOrderAmount: 3,
@@ -87,6 +96,7 @@ export const orderList = {
       isCreater: false,
     },
     {
+      id: 1,
       category: '패스트푸드',
       storeName: '버거킹전남대점',
       minimumOrderAmount: 3,
@@ -96,6 +106,7 @@ export const orderList = {
       isCreater: false,
     },
     {
+      id: 1,
       category: '패스트푸드',
       storeName: '버거킹전남대점',
       minimumOrderAmount: 3,
@@ -105,6 +116,7 @@ export const orderList = {
       isCreater: false,
     },
     {
+      id: 1,
       category: '패스트푸드',
       storeName: '버거킹전남대점',
       minimumOrderAmount: 3,
@@ -114,6 +126,7 @@ export const orderList = {
       isCreater: false,
     },
     {
+      id: 1,
       category: '패스트푸드',
       storeName: '버거킹전남대점',
       minimumOrderAmount: 3,
@@ -123,6 +136,7 @@ export const orderList = {
       isCreater: false,
     },
     {
+      id: 1,
       category: '패스트푸드',
       storeName: '버거킹전남대점',
       minimumOrderAmount: 3,
@@ -132,6 +146,7 @@ export const orderList = {
       isCreater: false,
     },
     {
+      id: 1,
       category: '패스트푸드',
       storeName: '버거킹전남대점',
       minimumOrderAmount: 3,
@@ -141,6 +156,7 @@ export const orderList = {
       isCreater: false,
     },
     {
+      id: 1,
       category: '패스트푸드',
       storeName: '버거킹전남대점',
       minimumOrderAmount: 3,
@@ -150,6 +166,7 @@ export const orderList = {
       isCreater: false,
     },
     {
+      id: 1,
       category: '패스트푸드',
       storeName: '버거킹전남대점',
       minimumOrderAmount: 3,
@@ -159,6 +176,7 @@ export const orderList = {
       isCreater: false,
     },
     {
+      id: 1,
       category: '패스트푸드',
       storeName: '버거킹전남대점',
       minimumOrderAmount: 3,
@@ -168,6 +186,7 @@ export const orderList = {
       isCreater: false,
     },
     {
+      id: 1,
       category: '패스트푸드',
       storeName: '버거킹전남대점',
       minimumOrderAmount: 3,
@@ -177,6 +196,7 @@ export const orderList = {
       isCreater: false,
     },
     {
+      id: 1,
       category: '패스트푸드',
       storeName: '버거킹전남대점',
       minimumOrderAmount: 3,
@@ -186,6 +206,7 @@ export const orderList = {
       isCreater: false,
     },
     {
+      id: 1,
       category: '패스트푸드',
       storeName: '버거킹전남대점',
       minimumOrderAmount: 3,
@@ -194,8 +215,8 @@ export const orderList = {
       price: 11900,
       isCreater: false,
     },
-
     {
+      id: 2,
       category: '중식',
       storeName: '스피드반점',
       minimumOrderAmount: 4,
@@ -205,6 +226,7 @@ export const orderList = {
       isCreater: true,
     },
     {
+      id: 3,
       category: '한식',
       storeName: '한솥도시락',
       minimumOrderAmount: 4,
@@ -214,6 +236,7 @@ export const orderList = {
       isCreater: true,
     },
     {
+      id: 4,
       category: '일식',
       storeName: '루키초밥',
       minimumOrderAmount: 4,
@@ -223,6 +246,7 @@ export const orderList = {
       isCreater: true,
     },
     {
+      id: 5,
       category: '일식',
       storeName: '상무초밥',
       minimumOrderAmount: 4,
@@ -232,6 +256,7 @@ export const orderList = {
       isCreater: true,
     },
     {
+      id: 5,
       category: '일식',
       storeName: '상무초밥',
       minimumOrderAmount: 4,
@@ -241,6 +266,7 @@ export const orderList = {
       isCreater: true,
     },
     {
+      id: 5,
       category: '일식',
       storeName: '상무초밥',
       minimumOrderAmount: 4,
@@ -250,6 +276,7 @@ export const orderList = {
       isCreater: true,
     },
     {
+      id: 5,
       category: '일식',
       storeName: '상무초밥',
       minimumOrderAmount: 4,
@@ -259,6 +286,7 @@ export const orderList = {
       isCreater: true,
     },
     {
+      id: 5,
       category: '일식',
       storeName: '상무초밥',
       minimumOrderAmount: 4,
@@ -268,6 +296,7 @@ export const orderList = {
       isCreater: true,
     },
     {
+      id: 5,
       category: '일식',
       storeName: '상무초밥',
       minimumOrderAmount: 4,
@@ -277,6 +306,7 @@ export const orderList = {
       isCreater: true,
     },
     {
+      id: 5,
       category: '일식',
       storeName: '상무초밥',
       minimumOrderAmount: 4,
@@ -286,6 +316,7 @@ export const orderList = {
       isCreater: true,
     },
     {
+      id: 5,
       category: '일식',
       storeName: '상무초밥',
       minimumOrderAmount: 4,
@@ -295,6 +326,7 @@ export const orderList = {
       isCreater: true,
     },
     {
+      id: 5,
       category: '일식',
       storeName: '상무초밥',
       minimumOrderAmount: 4,
@@ -304,6 +336,7 @@ export const orderList = {
       isCreater: true,
     },
     {
+      id: 5,
       category: '일식',
       storeName: '상무초밥',
       minimumOrderAmount: 4,
@@ -313,6 +346,7 @@ export const orderList = {
       isCreater: true,
     },
     {
+      id: 5,
       category: '일식',
       storeName: '상무초밥',
       minimumOrderAmount: 4,
@@ -322,6 +356,7 @@ export const orderList = {
       isCreater: true,
     },
     {
+      id: 5,
       category: '일식',
       storeName: '상무초밥',
       minimumOrderAmount: 4,
@@ -331,6 +366,7 @@ export const orderList = {
       isCreater: true,
     },
     {
+      id: 5,
       category: '일식',
       storeName: '상무초밥',
       minimumOrderAmount: 4,
@@ -340,6 +376,7 @@ export const orderList = {
       isCreater: true,
     },
     {
+      id: 5,
       category: '일식',
       storeName: '상무초밥',
       minimumOrderAmount: 4,
@@ -349,6 +386,7 @@ export const orderList = {
       isCreater: true,
     },
     {
+      id: 5,
       category: '일식',
       storeName: '상무초밥',
       minimumOrderAmount: 4,
@@ -358,6 +396,7 @@ export const orderList = {
       isCreater: true,
     },
     {
+      id: 5,
       category: '일식',
       storeName: '상무초밥',
       minimumOrderAmount: 4,

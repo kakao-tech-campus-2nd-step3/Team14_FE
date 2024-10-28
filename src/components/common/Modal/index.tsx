@@ -6,12 +6,14 @@ interface Props {
   size?: 'small' | 'big';
   isOpen: boolean;
   onRequestClose: () => void;
-  title: string;
+  title: string | ReactNode;
+  type?: 'alert' | 'complete' | 'warning' | 'transparent';
   content: ReactNode;
 }
 
 const Modal = ({
   size = 'small',
+  type = 'alert',
   isOpen,
   onRequestClose,
   title,
@@ -21,8 +23,10 @@ const Modal = ({
     <Wrapper>
       {isOpen && (
         <Overlay onClick={onRequestClose}>
-          <ModalBox size={size} onClick={(e) => e.stopPropagation()}>
-            <Header size={size}>{title}</Header>
+          <ModalBox onClick={(e) => e.stopPropagation()}>
+            <Header size={size} type={type}>
+              {title}
+            </Header>
             <Contents>{content}</Contents>
           </ModalBox>
         </Overlay>
@@ -43,31 +47,40 @@ const Overlay = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: ${Common.zIndex.common};
+  z-index: ${Common.zIndex.modal};
 `;
 
-const ModalBox = styled.div((props: { size: 'small' | 'big' }) => ({
-  width: props.size === 'small' ? '650px' : '700px',
-  height: props.size === 'small' ? '350px' : '800px',
-  backgroundColor: 'white',
-  borderRadius: '30px',
-}));
+const ModalBox = styled.div`
+  background-color: white;
+  border-radius: 30px;
+`;
 
-const Header = styled.div((props: { size: 'small' | 'big' }) => ({
-  height: '20%',
+const Header = styled.div<{
+  size: 'small' | 'big';
+  type?: 'alert' | 'complete' | 'warning' | 'transparent';
+}>((props) => ({
+  height: props.size === 'small' ? '50px' : '80px',
   fontWeight: 'bold',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
   borderRadius: '30px 30px 0 0',
   fontSize: props.size === 'small' ? '24px' : '36px',
-  backgroundColor:
-    props.size === 'small' ? Common.colors.primary : 'transparent',
   color: props.size === 'small' ? '#fff' : 'black',
+  backgroundColor: (() => {
+    if (props.type === 'alert') {
+      return Common.colors.primary;
+    } else if (props.type === 'complete') {
+      return Common.colors.complete;
+    } else if (props.type === 'warning') {
+      return Common.colors.warning;
+    }
+    return 'transparent';
+  })(),
 }));
 
 const Contents = styled.div`
-  height: 80%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -4,7 +4,7 @@ interface Props {
   category: string;
   storeName: string;
   pickUpLocation: string;
-  price: number;
+  price?: number;
 }
 
 const OrderListItem = ({
@@ -29,7 +29,7 @@ const OrderListItem = ({
           주문 날짜: 2024-08-13 <br />
           픽업장소: {pickUpLocation}
           <br />
-          결제금액: {price}P
+          {price != null ? `결제금액: ${price}P` : ``}
         </span>
       </Container>
     </Wrapper>
