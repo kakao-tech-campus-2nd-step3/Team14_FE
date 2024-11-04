@@ -7,8 +7,8 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { BsGeoAltFill } from 'react-icons/bs';
 import { useContext, useEffect, useState } from 'react';
 import Modal from '@components/common/Modal';
-import SearchBar from './PickupModal.tsx/SearchBar';
-import SearchMap from './PickupModal.tsx/SearchMap';
+import SearchBar from './PickupModal/SearchBar';
+import SearchMap from './PickupModal/SearchMap';
 import { SearchSpotContext } from '@provider/SearchSpot';
 
 interface Props {
@@ -39,7 +39,6 @@ const RecruitDialog = ({ onRequestClose, onRequestConfirm }: Props) => {
   } = useForm<FormValues>();
 
   const createRecruit: SubmitHandler<FormValues> = (data) => {
-    console.log(data);
     // 정상적으로 폼 전송이 완료 됐다면 폼꺼지고, 완료 폼 켜짐
     onRequestClose();
     onRequestConfirm();

@@ -3,24 +3,27 @@ import KakaoMap from '@components/spot/map';
 import StoreList from '@components/spot/storelist';
 import Swiper from '@components/spot/swiper';
 import styled from '@emotion/styled';
+import { ClickedLocationProvider } from '@provider/ClickedLocation';
 import { Common } from '@styles/globalStyle';
 
 const SpotPage = () => (
   <Wrapper>
-    <LeftWrapper>
-      <TitleWrapper>
-        <Title>마. 감. 임. 박. !</Title>
-        <SubTitle>
-          주문 마감 <Impact>30분</Impact> 전!
-        </SubTitle>
-      </TitleWrapper>
-      <Swiper />
-      <Line />
-      <StoreList />
-    </LeftWrapper>
-    <RightWrapper>
-      <KakaoMap />
-    </RightWrapper>
+    <ClickedLocationProvider>
+      <LeftWrapper>
+        <TitleWrapper>
+          <Title>마. 감. 임. 박. !</Title>
+          <SubTitle>
+            주문 마감 <Impact>30분</Impact> 전!
+          </SubTitle>
+        </TitleWrapper>
+        <Swiper />
+        <Line />
+        <StoreList />
+      </LeftWrapper>
+      <RightWrapper>
+        <KakaoMap />
+      </RightWrapper>
+    </ClickedLocationProvider>
   </Wrapper>
 );
 

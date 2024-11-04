@@ -14,7 +14,9 @@ interface Post {
   category: string;
   storeName: string;
   pickUpLocation: string;
+  deliveryStatus: boolean;
   price?: number;
+  isCreater: boolean;
 }
 interface OrderHistory {
   totalPages: number; //전체 페이지 수
@@ -60,6 +62,7 @@ const OrderHistoryPage = () => {
             <Link
               key={post.id}
               to={getDynamicPath.orderDetail(post.id)}
+              state={{ createrModeData: post.isCreater }}
               style={{ textDecoration: 'none', color: '#000' }}
             >
               <OrderListItem

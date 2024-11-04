@@ -17,7 +17,7 @@ const MyPoint: React.FC = () => {
         {selectedAmount ? `${selectedAmount.toLocaleString()} P` : '0 P'}
       </PointBalance>
       <AmountOptions>
-        {[5000, 10000, 20000, 30000].map((amount) => (
+        {[5_000, 10_000, 20_000, 30_000].map((amount) => (
           <AmountOption key={amount}>
             <input
               type="radio"

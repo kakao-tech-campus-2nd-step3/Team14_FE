@@ -14,13 +14,13 @@ const OrderHistoryDetailItem = ({ deliveryName, price, isPayed }: Props) => {
   return (
     <ListItem>
       <InfoWrapper>
-        <CheckBox type="checkbox"></CheckBox>
+        <CheckBox type="checkbox" />
         {isPayed ? (
           <Text>
-            '{deliveryName}'님이 {stringPrice}P 결제 완료했습니다.'
+            &apos;{deliveryName}&apos;님이 {stringPrice}P 결제 완료했습니다.
           </Text>
         ) : (
-          <Text>'{deliveryName}님 미결제입니다.'</Text>
+          <Text>&apos;{deliveryName}&apos;님 미결제입니다.</Text>
         )}
       </InfoWrapper>
       {isPayed ? (

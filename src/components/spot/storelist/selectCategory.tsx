@@ -1,13 +1,21 @@
 import styled from 'styled-components';
 import { categories } from './category';
+import { ClickedLocation } from '@provider/ClickedLocation';
 
 interface Props {
   setCategory: React.Dispatch<React.SetStateAction<string>>;
+  setClickedLocation?: React.Dispatch<
+    React.SetStateAction<ClickedLocation | undefined>
+  >;
 }
+const SelectCategory = ({ setCategory, setClickedLocation }: Props) => {
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setCategory(e.target.value);
+    if (setClickedLocation) setClickedLocation(undefined);
+  };
 
-const SelectCategory = ({ setCategory }: Props) => {
   return (
-    <Selector onChange={(e) => setCategory(e.target.value)}>
+    <Selector onChange={(e) => handleChange(e)}>
       <option>카테고리 선택</option>
       {categories.map((category) => (
         <option key={category} value={category}>

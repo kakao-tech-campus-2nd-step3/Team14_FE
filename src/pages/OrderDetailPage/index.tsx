@@ -1,29 +1,17 @@
 import styled from 'styled-components';
 import OrderListItem from '@components/OrderHistory/OrderListItem';
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import Menubar from '@components/mypage/Menubar';
-import Button from '@components/common/Button';
-import { Common } from '@styles/globalStyle';
+import OrderDetailCreater from '@components/OrderHistoryDetail/OrderDetailCreater';
+import OrderDetailMember from '@components/OrderHistoryDetail/OrderDetailMember';
 
 import { OrderDetailCreator } from '@components/OrderHistoryDetail/data';
-import OrderHistoryDetailItem from '@components/OrderHistoryDetail/OrderHistoryDetailItem';
-
-interface OrderDetailData {
-  category: string;
-  storeName: string;
-  pickUpLocation: string;
-  deliveryStatus: boolean;
-  memberInfo: MemberInfo[];
-}
-interface MemberInfo {
-  memberId: number;
-  deliveryName: string;
-  price: number;
-  isPayed: boolean;
-}
 
 const OrderDetailPage = () => {
+  const location = useLocation();
+  const isCreater: boolean = location.state.createrModeData;
+
   return (
     <Wrapper>
       <InnerWrapper>
@@ -35,35 +23,7 @@ const OrderDetailPage = () => {
         />
       </InnerWrapper>
       <InnerWrapper>
-        <ButtonContainer>
-          <Button
-            label="+ 결제 주문서 등록"
-            radius="20px"
-            bgColor={Common.colors.primary}
-          />
-          <Space1 />
-          <Button label="?" radius="50%" bgColor={Common.colors.button3} />
-        </ButtonContainer>
-        <ParticipantContainer>
-          {OrderDetailCreator.memberInfo.map((data) => (
-            <OrderHistoryDetailItem
-              deliveryName={data.deliveryName}
-              price={data.price}
-              isPayed={data.isPayed}
-            />
-          ))}
-        </ParticipantContainer>
-        <Button
-          label="수정하기"
-          radius="20px"
-          bgColor={Common.colors.primary}
-        />
-        <Space2 />
-        <Button
-          label="삭제하기"
-          radius="20px"
-          bgColor={Common.colors.primary05}
-        />
+        {isCreater ? <OrderDetailCreater /> : <OrderDetailMember />}
       </InnerWrapper>
     </Wrapper>
   );
@@ -83,24 +43,4 @@ const InnerWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 20px;
-`;
-
-const ButtonContainer = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: right;
-  margin-top: 10px;
-`;
-
-const Space1 = styled.div`
-  width: 10px;
-`;
-const Space2 = styled.div`
-  height: 10px;
-`;
-
-const ParticipantContainer = styled.div`
-  width: 100%;
-  margin: 20px 0 30px;
 `;

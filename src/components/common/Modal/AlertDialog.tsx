@@ -16,20 +16,23 @@ const AlertDialog = ({
   onRequestConfirm,
 }: Props) => {
   const btnBgColor = () => {
-    let btnBgColors = {
-      cancelBtn: Common.colors.primary05,
-      confirmBtn: Common.colors.primary,
-    };
-
-    if (type === 'complete') {
-      btnBgColors.cancelBtn = Common.colors.complete05;
-      btnBgColors.confirmBtn = Common.colors.complete;
-    } else if (type === 'warning') {
-      btnBgColors.cancelBtn = Common.colors.warning05;
-      btnBgColors.confirmBtn = Common.colors.warning;
+    switch (type) {
+      case 'complete':
+        return {
+          cancelBtn: Common.colors.complete05,
+          confirmBtn: Common.colors.complete,
+        };
+      case 'warning':
+        return {
+          cancelBtn: Common.colors.warning05,
+          confirmBtn: Common.colors.warning,
+        };
+      default:
+        return {
+          cancelBtn: Common.colors.primary05,
+          confirmBtn: Common.colors.primary,
+        };
     }
-
-    return btnBgColors;
   };
   return (
     <div>

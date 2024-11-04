@@ -1,6 +1,6 @@
 import React, { useContext, useRef, useEffect } from 'react';
 import styled from '@emotion/styled';
-import { LocationContext } from '@provider/Location';
+import { LocationContext } from '@provider/PresentLocation';
 import Button from '@components/common/Button';
 import { Common } from '@styles/globalStyle';
 import { useNavigate } from 'react-router-dom';

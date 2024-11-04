@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Common } from '@styles/globalStyle';
 import Button from '@components/common/Button';
 import Background from '@components/common/Background/index';
+import { HEADER_HEIGHT } from '@components/features/Layout/Header';
 
 const IntroducePage: React.FC = () => {
   const navigate = useNavigate();
@@ -39,6 +40,7 @@ export default IntroducePage;
 const Wrapper = styled.div`
   display: flex;
   width: 100%;
+  min-height: calc(100vh - ${HEADER_HEIGHT});
   position: relative;
 `;
 

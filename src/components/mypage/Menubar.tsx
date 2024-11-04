@@ -7,7 +7,7 @@ export const Menubar = () => {
 
   return (
     <Wrapper>
-      <LinkStyle to="/mypage" isActive={pagePath == '/mypage'}>
+      <LinkStyle to="/mypage" isActive={pagePath === '/mypage'}>
         프로필
       </LinkStyle>
       <LinkStyle
@@ -16,7 +16,7 @@ export const Menubar = () => {
       >
         주문내역
       </LinkStyle>
-      <LinkStyle to="/mypage/point" isActive={pagePath == '/mypage/point'}>
+      <LinkStyle to="/mypage/point" isActive={pagePath === '/mypage/point'}>
         포인트 충전/환전
       </LinkStyle>
     </Wrapper>
@@ -30,7 +30,7 @@ const Wrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 60px 15% 80px;
+  padding: 60px 15% 60px;
 `;
 
 const LinkStyle = styled(Link)<{ isActive: boolean }>`

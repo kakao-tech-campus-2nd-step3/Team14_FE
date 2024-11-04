@@ -1,4 +1,4 @@
-import { LocationContext } from '@provider/Location';
+import { LocationContext } from '@provider/PresentLocation';
 import { useContext, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { BsPlusCircleFill } from 'react-icons/bs';
@@ -10,10 +10,15 @@ import { SearchSpotProvider } from '@provider/SearchSpot';
 import AlertDialog from '@components/common/Modal/AlertDialog';
 import { useNavigate } from 'react-router-dom';
 import { RouterPath } from '@routes/path';
+import { storeList } from '../swiper/data';
+import { ClickedLocationContext } from '@provider/ClickedLocation';
 
 const KakaoMap = () => {
   const { location } = useContext(LocationContext);
+  const { setClickedLocation } = useContext(ClickedLocationContext);
+
   const navigate = useNavigate();
+  const datas = storeList;
 
   const [recruitIsOpen, setRecruitIsOpen] = useState(false);
   const [completeModalIsOpen, setCompleteModalIsOpen] = useState(false);
@@ -28,12 +33,34 @@ const KakaoMap = () => {
         <BsPlusCircleFill size="50" />
       </PlusBtnIcon>
 
+      {/* 현재 내위치_빨간색 마커 */}
       <MapMarker
         position={{
           lat: location.lat,
           lng: location.lng,
         }}
+        image={{
+          src: '/image/myLocation.png',
+          size: { width: 33, height: 45 },
+        }}
       />
+
+      {/* 배달 스팟들의 위치_파란색 마커 */}
+      {datas.map((data) => (
+        <MapMarker
+          key={data.id}
+          position={{
+            lat: data.lat,
+            lng: data.lng,
+          }}
+          clickable={true}
+          // 해당 스팟에 있는 배달 리스트를 리스트에서 보여주기
+          onClick={() => {
+            setClickedLocation({ lat: data.lat, lng: data.lng });
+          }}
+        />
+      ))}
+
       <Modal
         size="big"
         type="transparent"

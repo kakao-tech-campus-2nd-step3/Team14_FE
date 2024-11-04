@@ -23,7 +23,7 @@ export const orderList = {
       pickUpLocation: '경기 용인시 수지구 용구대로 2770',
       deliveryStatus: true,
       price: 11900,
-      isCreater: false,
+      isCreater: true,
     },
     {
       id: 1,

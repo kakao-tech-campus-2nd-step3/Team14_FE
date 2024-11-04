@@ -19,3 +19,12 @@ export const OrderDetailCreator = {
     },
   ],
 };
+
+export const OrderDetailMemberData = {
+  category: '패스트푸드',
+  storeName: '버거킹전남대점',
+  minimumOrderAmount: 3,
+  pickUpLocation: 'example1',
+  deliveryStatus: false,
+  price: 11900,
+};

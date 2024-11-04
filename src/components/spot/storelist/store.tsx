@@ -6,41 +6,81 @@ import styled from '@emotion/styled';
 import { Common } from '@styles/globalStyle';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { RouterPath } from '@routes/path';
+import { getDynamicPath, RouterPath } from '@routes/path';
 
 interface Props {
-  image: string;
-  storeName: string;
-  address: string;
+  spotId: string;
   category: string;
+  storeName: string;
+  deadlineTime: string;
+  address: string;
 }
-const Store = ({ image, storeName, address, category }: Props) => {
-  const [isOpen, setIsOpen] = useState(false);
+const Store = ({
+  spotId,
+  storeName,
+  address,
+  deadlineTime,
+  category,
+}: Props) => {
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [sendLinkIsOpen, setSendLinkIsOpen] = useState(false);
+  //TODO: 로그인 여부 확인 만들어질 때까지 임시 사용
+  const [login, setLogin] = useState(true);
 
   const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (login) {
+      //로그인이 되어있을 경우
+      setSendLinkIsOpen(true);
+    } else {
+      //로그인이 안되어 있을 경우
+      setIsLoginOpen(true);
+    }
+  };
   return (
     <Wrapper>
-      <Logo image={image} />
+      <Logo image={`/image/categories/${category}.png`} />
       <DescriptWrapper>
         <Category>[{category}]</Category>
         <Title>{storeName}</Title>
-        주문마감 :<Address>픽업 | {address}</Address>
+        주문마감 : {deadlineTime}
+        <Address>픽업 | {address}</Address>
       </DescriptWrapper>
       <Button
         label="선택"
         bgColor={Common.colors.primary}
         radius="20px"
-        onClick={() => setIsOpen(true)}
+        onClick={handleClick}
       />
       <Modal
-        isOpen={isOpen}
-        onRequestClose={() => setIsOpen(false)}
+        isOpen={isLoginOpen}
+        onRequestClose={() => setIsLoginOpen(false)}
         title="로그인이 필요한 서비스입니다."
         content={
           <AlertDialog
             content="로그인 페이지로 이동하시겠습니까?"
-            onRequestClose={() => setIsOpen(false)}
+            onRequestClose={() => setIsLoginOpen(false)}
             onRequestConfirm={() => navigate(RouterPath.login)}
+          />
+        }
+      />
+      <Modal
+        isOpen={sendLinkIsOpen}
+        onRequestClose={() => setSendLinkIsOpen(false)}
+        title={<div>[{storeName}] 주문이 맞으신가요?</div>}
+        content={
+          <AlertDialog
+            content={
+              <div>
+                가입하신 번호로 배민 함께주문 링크를
+                <br /> 전송해드리겠습니다.
+              </div>
+            }
+            onRequestClose={() => setSendLinkIsOpen(false)}
+            onRequestConfirm={() =>
+              navigate(getDynamicPath.orderDetail(Number(spotId)))
+            }
           />
         }
       />
@@ -50,11 +90,12 @@ const Store = ({ image, storeName, address, category }: Props) => {
 export default Store;
 
 const Wrapper = styled.div`
+  width: 100%;
   display: flex;
-  gap: 20px;
-  align-items: center;
-  justify-content: center;
+  align-items: end;
+  justify-content: space-between;
   margin: 20px 0;
+  line-height: 1.3;
 `;
 
 const DescriptWrapper = styled.div`

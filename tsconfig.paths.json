@@ -6,7 +6,8 @@
       "@pages/*": ["./pages/*"],
       "@styles/*": ["./styles/*"],
       "@provider/*": ["./provider/*"],
-      "@routes/*": ["./routes/*"]
+      "@routes/*": ["./routes/*"],
+      "@api/*": ["./api/*"]
     }
   }
 }
