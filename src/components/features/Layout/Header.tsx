@@ -4,6 +4,9 @@ import { LocationContext } from '@provider/PresentLocation';
 import Button from '@components/common/Button';
 import { Common } from '@styles/globalStyle';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '@provider/AuthProvider';
+import Cookies from 'js-cookie';
+import { fetchAuthInstance } from '@api/instance/index';
 
 export const HEADER_HEIGHT = '64px';
 
@@ -20,6 +23,7 @@ export const Header: React.FC = () => {
   const { location, setLocation } = useContext(LocationContext);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -28,9 +32,7 @@ export const Header: React.FC = () => {
   const getLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
-
       const geocoder = new kakao.maps.services.Geocoder();
-
       geocoder.coord2Address(longitude, latitude, (result, status) => {
         if (status === kakao.maps.services.Status.OK) {
           setLocation({
@@ -51,6 +53,14 @@ export const Header: React.FC = () => {
     });
   };
 
+  const handleLogout = () => {
+    fetchAuthInstance.post('/auth/logout').then(() => {
+      Cookies.remove('access_token');
+      setIsLoggedIn(false);
+      navigate('/');
+    });
+  };
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -60,7 +70,6 @@ export const Header: React.FC = () => {
         setIsDropdownOpen(false);
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
@@ -71,7 +80,7 @@ export const Header: React.FC = () => {
     <Wrapper>
       <Container>
         <HeaderLeft>
-          <LogoWrapper href="/">
+          <LogoWrapper onClick={() => navigate('/')}>
             <Logo src="/image/logo.png" alt="로고" />
             <Location>요기 먹때</Location>
           </LogoWrapper>
@@ -89,58 +98,70 @@ export const Header: React.FC = () => {
           </DropdownContainer>
         </HeaderLeft>
 
-        <Button
-          label="로그인"
-          bgColor="#ffd500"
-          radius="5px"
-          onClick={() => navigate('/login')}
-        />
+        {isLoggedIn ? (
+          <Button
+            label="로그아웃"
+            bgColor="#ffd500"
+            radius="5px"
+            onClick={handleLogout}
+          />
+        ) : (
+          <Button
+            label="로그인"
+            bgColor="#ffd500"
+            radius="5px"
+            onClick={() => navigate('/login')}
+          />
+        )}
       </Container>
     </Wrapper>
   );
 };
 
+export default Header;
+
 const Wrapper = styled.header`
   box-sizing: border-box;
   position: fixed;
-  z-index: ${Common.zIndex.header};
-  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
   height: ${HEADER_HEIGHT};
   background-color: ${Common.colors.primary};
   display: flex;
+  align-items: center;
   justify-content: center;
-  padding: 0 20px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+  z-index: 1000;
 `;
 
 const Container = styled.div`
   width: 100%;
-  max-width: 1700px;
+  max-width: 1200px;
+  padding: 0 20px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 `;
 
 const HeaderLeft = styled.div`
   display: flex;
   align-items: center;
-  position: relative;
 `;
 
-const LogoWrapper = styled.a`
+const LogoWrapper = styled.div`
   display: flex;
   align-items: center;
-  text-decoration: none;
+  cursor: pointer;
 `;
 
 const Logo = styled.img`
-  height: 45px;
+  height: 40px;
   margin-right: 10px;
 `;
 
 const Location = styled.span`
-  font-size: 25px;
   color: white;
+  font-size: 18px;
   font-weight: bold;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 `;
@@ -183,5 +204,3 @@ const DropdownItem = styled.div<DropdownItemProps>`
     background-color: #f0f0f0;
   }
 `;
-
-export default Header;

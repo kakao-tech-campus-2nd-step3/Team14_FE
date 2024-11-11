@@ -26,7 +26,15 @@ const OrderHistoryDetailItem = ({ deliveryName, price, isPayed }: Props) => {
       {isPayed ? (
         <Button label="완료" radius="20px" bgColor={Common.colors.primary} />
       ) : (
-        <Button label="결제요청" radius="20px" />
+        <Button
+          label="결제요청"
+          radius="20px"
+          bgColor="#fff"
+          style={{
+            border: `1px solid ${Common.colors.primary}`,
+            color: `${Common.colors.primary}`,
+          }}
+        />
       )}
     </ListItem>
   );

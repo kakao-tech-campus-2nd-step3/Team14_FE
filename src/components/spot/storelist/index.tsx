@@ -1,10 +1,12 @@
 import styled from '@emotion/styled';
-import { storeList } from '../swiper/data';
-import Store from './store';
 import { Common } from '@styles/globalStyle';
-import SelectCategory from './selectCategory';
 import { useContext, useState } from 'react';
 import { ClickedLocationContext } from '@provider/ClickedLocation';
+import { useGetSpotInfo } from '@api/hooks/useGetSpotInfo';
+import { LocationContext } from '@provider/PresentLocation';
+import { storeList } from '../swiper/data';
+import Store from './store';
+import SelectCategory from './selectCategory';
 
 const StoreList = () => {
   const SELECT_CATEOGRY = '카테고리 선택';
@@ -12,6 +14,7 @@ const StoreList = () => {
   const { clickedLocation, setClickedLocation } = useContext(
     ClickedLocationContext,
   );
+  const { location } = useContext(LocationContext);
 
   const filterList = () => {
     if (clickedLocation) {
@@ -26,6 +29,8 @@ const StoreList = () => {
     }
     return storeList.filter((store) => category === store.category);
   };
+
+  // const { data } = useGetSpotInfo({ lat: location.lat, lng: location.lng });
 
   return (
     <Wrapper>

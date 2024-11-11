@@ -1,39 +1,64 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import Background from '@components/common/Background/index';
 import { HEADER_HEIGHT } from '@components/features/Layout/Header';
-import axios from 'axios';
+import { fetchInstance } from '@api/instance/index';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
-import { useLocation } from 'react-router-dom';
+import { AuthContext } from '@provider/AuthProvider';
 
-const KAKAO_CLIENT_ID = '26fa7f4117f85e9410f59d4fb651ef16';
-const KAKAO_REDIRECT_URI = 'http://localhost:3000';
-const BACKEND_API_URL = 'http://3.39.23.121:8080/api/v1/auth/login';
+const KAKAO_CLIENT_ID = '709c9edf5275cd3bedfb03c7f92e7af5';
+const KAKAO_REDIRECT_URI = 'http://localhost:3000/login';
 const KAKAO_AUTH_URL = 'https://kauth.kakao.com/oauth/authorize';
 
 const LoginPage: React.FC = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { setIsLoggedIn } = useContext(AuthContext);
+  const [isCodeProcessed, setIsCodeProcessed] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const query = new URLSearchParams(location.search);
     const code = query.get('code');
 
-    if (code) {
-      axios
-        .post(
-          BACKEND_API_URL,
-          { code },
-          { headers: { 'Content-Type': 'application/json' } },
-        )
+    if (code && !isCodeProcessed) {
+      if (sessionStorage.getItem('codeProcessed')) return;
+
+      setIsCodeProcessed(true);
+      sessionStorage.setItem('codeProcessed', 'true');
+
+      fetchInstance
+        .get('/auth/login', {
+          headers: {
+            Authorization: `Bearer ${code}`,
+            'Content-Type': 'application/json',
+          },
+          maxRedirects: 0,
+        })
         .then((response) => {
-          const accessToken = response.data.access_token;
-          Cookies.set('access_token', accessToken);
+          const accessToken = response.data.data;
+          if (accessToken) {
+            Cookies.set('access_token', accessToken);
+            setIsLoggedIn(true);
+            navigate('/');
+          }
         })
         .catch((error) => {
-          console.error('로그인 실패:', error);
+          if (error.response) {
+            if (error.response.status === 404) {
+              const redirectUrl = error.request.responseURL;
+              if (redirectUrl) {
+                window.location.href = redirectUrl;
+              }
+            } else {
+              navigate('/');
+            }
+          } else {
+            navigate('/');
+          }
         });
     }
-  }, [location]);
+  }, [location.search, isCodeProcessed, navigate, setIsLoggedIn]);
 
   const handleKakaoLogin = () => {
     const kakaoAuthUrl = `${KAKAO_AUTH_URL}?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;

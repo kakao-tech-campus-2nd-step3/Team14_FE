@@ -1,7 +1,5 @@
 import styled from '@emotion/styled';
 
-import { IoClose } from 'react-icons/io5';
-
 interface Props {
   date: string;
   point: number;
@@ -24,9 +22,6 @@ const PointListItem = ({ date, point, filter }: Props) => {
           </Time>
         </PointInfo>
       </DetailContainer>
-      <CloseDiv>
-        <IoClose size="30px" color="#6A6863" />
-      </CloseDiv>
     </Container>
   );
 };
@@ -68,9 +63,4 @@ const PointInfo = styled.div`
 const Time = styled.span`
   font-size: 13px;
   color: #909090;
-`;
-
-const CloseDiv = styled.div`
-  position: absolute;
-  right: 20px;
 `;

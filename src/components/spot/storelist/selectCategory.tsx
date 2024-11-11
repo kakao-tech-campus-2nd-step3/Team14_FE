@@ -15,7 +15,7 @@ const SelectCategory = ({ setCategory, setClickedLocation }: Props) => {
   };
 
   return (
-    <Selector onChange={(e) => handleChange(e)}>
+    <Selector onChange={handleChange}>
       <option>카테고리 선택</option>
       {categories.map((category) => (
         <option key={category} value={category}>
