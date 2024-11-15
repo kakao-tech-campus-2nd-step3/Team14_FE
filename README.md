@@ -12,7 +12,7 @@
 
 ## 배포 링크
 
-✅FE: https://team14-fe.vercel.app/  
+✅FE: [https://team14-fe.vercel.app/  ](https://team14-fe-livid.vercel.app/)  
 ✅BE: https://order-together.duckdns.org/api/v1
 
 ## 주요기능
@@ -84,4 +84,9 @@
 
 ![alt text](image-8.png)
 
+</details>
+
+<details>
+<summary>결제페이지</summary>
+  <img width="1277" alt="image" src="https://github.com/user-attachments/assets/8bafcb32-3cc0-433f-a1b3-b9b976a60c5e">
 </details>
