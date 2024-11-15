@@ -43,19 +43,31 @@ const LoginPage: React.FC = () => {
           },
           maxRedirects: 0,
         })
-        //@ts-ignore
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.redirectURL) {
-            window.location.href = data.redirectURL;
+        .then((response) => {
+          if (response.status === 302) {
+            window.location.href = response.data.redirectURL;
           }
-          const accessToken = data.data.token;
+          const accessToken = response.data.data.token;
           if (accessToken) {
             Cookies.set('access_token', accessToken);
             setIsLoggedIn(true);
 
             navigate(RouterPath.root);
             navigate(0);
+          }
+        })
+        .catch((error) => {
+          if (error.response) {
+            if (error.response.status === 404) {
+              const redirectUrl = error.request.responseURL;
+              if (redirectUrl) {
+                window.location.href = redirectUrl;
+              }
+            } else {
+              navigate(RouterPath.root);
+            }
+          } else {
+            navigate(RouterPath.root);
           }
         });
     }
