@@ -12,7 +12,7 @@ import AlertDialog from '@components/common/Modal/AlertDialog';
 import { RouterPath } from '@routes/path';
 
 const KAKAO_CLIENT_ID = '709c9edf5275cd3bedfb03c7f92e7af5';
-const KAKAO_REDIRECT_URI = 'http://localhost:3000/login';
+const KAKAO_REDIRECT_URI = 'https://team14-fe-livid.vercel.app/login';
 const KAKAO_AUTH_URL = 'https://kauth.kakao.com/oauth/authorize';
 
 const LoginPage: React.FC = () => {
