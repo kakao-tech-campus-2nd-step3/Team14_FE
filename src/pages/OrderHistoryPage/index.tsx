@@ -34,7 +34,6 @@ const OrderHistoryPage = () => {
   const VIEW_PAGE_COUNT = 5;
   const [currentPage, setCurrentPage] = useState(1);
   const { refetch, data } = useGetOrderList(currentPage);
-  console.log(data);
 
   const pageNumbers = Array.from(
     { length: data?.totalPages || 0 },

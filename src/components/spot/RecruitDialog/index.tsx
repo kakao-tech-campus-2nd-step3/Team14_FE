@@ -121,7 +121,7 @@ const RecruitDialog = ({
         onRequestError();
       },
     };
-    // console.log(orderId);
+
     if (modify) {
       //@ts-ignore
       putMutate({ ...requestData, id: Number(orderId) }, requestOptions);
