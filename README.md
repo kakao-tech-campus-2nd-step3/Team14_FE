@@ -85,3 +85,8 @@
 ![alt text](image-8.png)
 
 </details>
+
+<details>
+<summary>결제페이지</summary>
+  <img width="1277" alt="image" src="https://github.com/user-attachments/assets/8bafcb32-3cc0-433f-a1b3-b9b976a60c5e">
+</details>
