@@ -12,8 +12,14 @@
 
 ## 배포 링크
 
-✅FE: [https://team14-fe.vercel.app/  ](https://team14-fe-livid.vercel.app/)  
+✅FE: https://team14-fe-livid.vercel.app/  
 ✅BE: https://order-together.duckdns.org/api/v1
+
+## 테스트 계정
+```
+ordertogether24@gmail.com
+team14!!
+```
 
 ## 주요기능
 
