@@ -28,16 +28,13 @@ const MyPoint: React.FC<MyPointProps> = ({
       const accessToken = Cookies.get('access_token');
       if (!accessToken) return;
 
-      const response = await fetch(
-        'https://order-together.duckdns.org/api/v1/members',
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`,
-          },
+      const response = await fetch('http://3.36.88.170:8080/api/v1/members', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
         },
-      );
+      });
 
       if (response.ok) {
         const data = await response.json();
@@ -84,20 +81,17 @@ const MyPoint: React.FC<MyPointProps> = ({
     }
 
     try {
-      const response = await fetch(
-        'https://order-together.duckdns.org/api/v1/payments',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`,
-          },
-          body: JSON.stringify({
-            idempotencySeed: Math.random().toString(36).substr(2, 10),
-            productIds,
-          }),
+      const response = await fetch('http://3.36.88.170:8080/api/v1/payments', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
         },
-      );
+        body: JSON.stringify({
+          idempotencySeed: Math.random().toString(36).substr(2, 10),
+          productIds,
+        }),
+      });
 
       if (!response.ok) {
         throw new Error('결제 정보 저장 실패');

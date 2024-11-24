@@ -53,6 +53,9 @@ const SignupPage: React.FC = () => {
           navigate(RouterPath.root);
           navigate(0);
         }
+      })
+      .catch((error) => {
+        console.log('signup:', error);
       });
   };
 

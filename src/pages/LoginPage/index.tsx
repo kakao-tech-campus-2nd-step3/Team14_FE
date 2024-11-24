@@ -41,12 +41,9 @@ const LoginPage: React.FC = () => {
             Authorization: `Bearer ${code}`,
             'Content-Type': 'application/json',
           },
-          maxRedirects: 0,
         })
         .then((response) => {
-          if (response.status === 302) {
-            window.location.href = response.data.redirectURL;
-          }
+          console.log('호출');
           const accessToken = response.data.data.token;
           if (accessToken) {
             Cookies.set('access_token', accessToken);
@@ -57,6 +54,7 @@ const LoginPage: React.FC = () => {
           }
         })
         .catch((error) => {
+          console.log('login: ', error);
           if (error.response) {
             if (error.response.status === 404) {
               const redirectUrl = error.request.responseURL;

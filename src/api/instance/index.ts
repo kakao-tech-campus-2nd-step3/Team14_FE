@@ -14,7 +14,7 @@ const initInstance = (config: AxiosRequestConfig): AxiosInstance => {
   return instance;
 };
 
-const BASE_URL = 'https://order-together.duckdns.org/api/v1';
+const BASE_URL = 'http://3.36.88.170:8080/api/v1';
 
 export const fetchInstance = initInstance({
   baseURL: BASE_URL,

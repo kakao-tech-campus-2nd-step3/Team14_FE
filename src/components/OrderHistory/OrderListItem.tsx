@@ -22,11 +22,6 @@ const OrderListItem = ({
     <Wrapper>
       <Logo image={`/image/categories/${category.replaceAll(', ', ',')}.png`} />
       <Container>
-        <div>
-          <img src="/image/ing.png" alt="진행중" />
-          <ProgressLabel>{deliveryStatus}</ProgressLabel>
-        </div>
-
         <Title>
           [{category}] {storeName}
         </Title>
@@ -34,7 +29,7 @@ const OrderListItem = ({
           주문 날짜: {date[0]}-{date[1]}-{date[2]} <br />
           픽업장소: {pickUpLocation}
           <br />
-          {price ? `결제금액: ${price}P` : ''}
+          {price && price !== -1 ? `결제금액: ${price}P` : ''}
         </span>
       </Container>
     </Wrapper>
