@@ -29,6 +29,7 @@ const Profile = ({ editMode, name, phoneNumber }: Props) => {
       .then((response) => {
         if (response.status === 200 && response.data) {
           Cookies.remove('access_token');
+          sessionStorage.removeItem('codeProcessed');
           setIsLoggedIn(false);
           navigate(RouterPath.introduce);
         }
